@@ -1,1 +1,28 @@
-<p>register-form works!</p>
+<form action="/NEXT_PAGE_After_Register" method="post">
+    <div class="imgcontainer">
+        <img src="assets/img/registerLogo.png" alt="Avatar" class="avatar">
+    </div>
+
+
+    <div class="container">
+        <h2 class="info"><b>Please enter your user information ! </b></h2>
+        <p></p>
+        <label for="uname"><b>Username: </b></label>
+        <input type="text" placeholder="Enter Username" name="uname" required>
+    
+        <label for="psw"><b>Password: </b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
+
+        <label for="psw-confirm"><b>Confirm Password</b></label>
+        <input type="password" placeholder="Confirm Password" name="psw-repeat" required>
+
+        <label>
+          <input type="checkbox" checked="checked" name="remember"> Team Leader?
+        </label>
+        <p></p>
+        <label for="tname"><b>The name of your new Team: </b></label>
+        <input type="text" placeholder="Enter the name of your new team:" name="tname" required>
+      </div>  
+      <button type="submit">Register</button>  
+      <button onclick="location.href='./login-form'" type="button" class="alrparticbtn">Already participation ?</button>
+      </form>
