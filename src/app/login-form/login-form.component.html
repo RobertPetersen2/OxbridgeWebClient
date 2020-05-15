@@ -1,1 +1,22 @@
-<p>login-form works!</p>
+<form action="/NEXT_PAGE_" method="post">
+    <div class="imgcontainer">
+      <img src="assets/img/loginFace.png" alt="Avatar" class="avatar">
+    </div>
+
+
+<div class="container">
+    <h2 class="info"><b>Please enter your info ! </b></h2>
+    <p></p>
+    <label for="uname"><b>Username: </b></label>
+    <input type="text" placeholder="Enter Username" name="uname" required>
+
+    <label for="psw"><b>Password: </b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+        
+    <button type="submit">Login</button>
+    <label>
+      <input type="checkbox" checked="checked" name="remember"> Remember me
+    </label>
+  </div>    
+    <button onclick="location.href='./register-form'" type="button" class="registerbtn">Register</button>
+  </form>

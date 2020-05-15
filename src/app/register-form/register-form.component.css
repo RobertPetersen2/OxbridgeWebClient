@@ -1,0 +1,28 @@
+input[type=text], input[type=password] { /* Usernmae and password customization */ 
+    width: 100%;
+    padding: 12px 20px;
+    margin: 10px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+  button {  /* Customization the every button we have in login-form */ 
+    background-color: #00BFFF;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;    
+  }
+
+  .imgcontainer { /*  Where the picture will be placed.  */ 
+    text-align: center;
+    margin: 24px 0 12px 0;
+  }
+
+
+  h2.info {
+    text-align: center;
+  }
