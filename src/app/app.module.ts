@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
 import { TeamListComponent } from './team-list/team-list.component';
+import { TeamMemberPendingApprovalsComponent } from './team-member-pending-approvals/team-member-pending-approvals.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { TeamListComponent } from './team-list/team-list.component';
     HomeComponent,
     LoginFormComponent,
     RegisterFormComponent,
-    TeamListComponent
+    TeamListComponent,
+    TeamMemberPendingApprovalsComponent
   ],
   imports: [
     BrowserModule,
