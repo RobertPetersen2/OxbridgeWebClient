@@ -1,28 +1,55 @@
 <p></p>
 <br>
 <br>
-<table>
-    <tr>
-      <th>Team name: </th>
-    </tr>
-    <tr>
-        <td>TheBoisFromDaHood</td> 
-        <div class="container">
-            <button type="button" class="btn btn-warning">Edit</button>
-            <button type="button" class="btn btn-danger">Delete</button>
-        </div>
-      </tr>
-</table>
-
-
-<br>
-<br>
-
-<!-- OTHER WAY TO EDIT! right to the first name-->
-<td ng-click="editUser(user)">
-    <input type="text" name="firstName" ng-show="user.editMode" class="form-control" ng-model="user.firstName" placeholder="TheBoisFromDaHood" value="TheBoisFromDaHood" required="" />
-  </td>
-  <td>
-    <a href="" ng-hide="user.editMode" ng-click="editUser(user)">Edit</a>
-    |
-    <a href="" ng-hide="user.Delete" ng-click="editUser(user)">Delete</a>
+<div class="containerCenter">
+    <div class="center">
+        <table style="float: left;">
+            <tr>
+              <th>Team name: </th>
+            </tr>
+            <tr>
+                <td>TheBoisFromDaHood</td> 
+                <div class="container">
+                  <tr>
+                    <button type="button" class="btn btn-warning" >Edit</button>
+                    <button type="button" class="btn btn-danger">Delete</button>
+                  </tr>
+                </div>
+              </tr>
+        </table>
+        
+        
+        
+        <table style="float:right;">
+            <tr>
+                <th>Team Leader: </th>
+            </tr>
+            <tr *ngFor="let team of teams; index as i"> 
+                {{i+1}} teamName: {{team.teamName}}
+                <button type="button" class="btn btn-warning" (click)="editTeam(team)">Edit</button>
+                <button type="button" class="btn btn-danger" (click)="deleteTeam(team)">Delete</button>
+            </tr>
+        </table>
+        
+        
+        
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        
+        
+        
+        
+        <td ng-click="editUser(user)">
+            <input type="text" name="firstName" ng-show="user.editMode" class="form-control" ng-model="user.firstName" placeholder="TheBoisFromDaHood" value="TheBoisFromDaHood" required="" />
+          </td>
+          <td>
+            <a href="" ng-hide="user.editMode" ng-click="editUser(user)">Create</a>
+    </div>
+</div>
