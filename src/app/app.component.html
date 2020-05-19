@@ -1,13 +1,78 @@
-<h1>Oxbridge Backend</h1>
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
 
-<div class="links">
+  <!-- Navbar brand -->
+  <mdb-navbar-brand><a class="navbar-brand" href="#">Oxbridge Race</a></mdb-navbar-brand>
+
+  <!-- Collapsible content -->
+  <links>
+      <!-- Links -->
+      <ul class="navbar-nav mr-auto">
+          <li class="nav-item" [routerLinkActive]="['active']">
+              <a class="nav-link waves-light" mdbWavesEffect routerLink="/home" routerLinkActive="active">
+                Home<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['active']">
+            <a class="nav-link waves-light" mdbWavesEffect routerLink="/team-list" routerLinkActive="active">
+              Teams</a>
+        </li>
+        <li class="nav-item" [routerLinkActive]="['active']">
+          <a class="nav-link waves-light" mdbWavesEffect routerLink="/enroll-participant" routerLinkActive="active">
+            Participant Enrollment</a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/team-member-pending-approvals" routerLinkActive="active">
+          Pending Approvals</a>
+    </li>
+      </ul>
+      <!-- Links -->
+      <ul class="navbar-nav ml-auto nav-flex-icons">
+        <li class="nav-item">
+          <a class="nav-link">
+            <mdb-icon fab icon="twitter"></mdb-icon>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">
+            <mdb-icon fab icon="google-plus"></mdb-icon>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">
+            <div class="btn-group" mdbDropdown>
+              <mdb-icon fas icon="user" mdbDropdownToggle></mdb-icon>
+              <div class="dropdown-menu dropdown-menu-right dropdown-primary">
+                <a class="dropdown-item" href="#" routerLink="/register-form" routerLinkActive="active">Sign-out</a>
+                <a class="dropdown-item" href="#">Profile</a>
+                <div class="divider dropdown-divider"></div>
+                <a class="dropdown-item" href="#" routerLink="/login-form" routerLinkActive="active">Login</a>
+
+              </div>
+            </div>
+          </a>
+        </li>
+      </ul>
+
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
+
+
+
+
+
+<!-- <div class="links">
   <nav>
+
     <a routerLink="/home" routerLinkActive="active">Home</a>
     <a routerLink="/login-form" routerLinkActive="active">Login</a>
     <a routerLink="/register-form" routerLinkActive="active">Register</a>
     <a routerLink="/team-list" routerLinkActive="active">Team List</a>
+    <a routerLink="/enroll-participant" routerLinkActive="active">Participant Enrollment</a>
     <a routerLink="/team-member-pending-approvals" routerLinkActive="active">Pending Approvals</a>
   </nav>
-</div>
+</div> -->
 
 <router-outlet></router-outlet>

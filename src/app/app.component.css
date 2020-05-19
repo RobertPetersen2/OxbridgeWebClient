@@ -9,3 +9,10 @@
 h1{
     background-color: grey;
 }
+
+nav{
+    background-color: royalblue;
+    height: 100%;
+    text-decoration-color: seashell;
+}
+
