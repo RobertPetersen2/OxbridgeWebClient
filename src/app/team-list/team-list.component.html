@@ -20,7 +20,7 @@
         
         
         
-        <table style="float:right;">
+        <!-- <table style="float:right;">
             <tr>
                 <th>Team Leader: </th>
             </tr>
@@ -29,8 +29,33 @@
                 <button type="button" class="btn btn-warning" (click)="editTeam(team)">Edit</button>
                 <button type="button" class="btn btn-danger" (click)="deleteTeam(team)">Delete</button>
             </tr>
-        </table>
+        </table> -->
         
+        <table style="float: right;">
+          <tr>
+            <th>Team Leader: </th>
+          </tr>
+          <tr>
+              <td>BOB#1</td> 
+              <div class="container">
+                <tr *ngFor="let team of teams; index as i">
+                  {{i+1}} teamName: {{team.teamName}}
+                  <button type="button" class="btn btn-warning" (click)="editTeam(team)">Edit</button>
+                  <button type="button" class="btn btn-danger" (click)="deleteTeam(team)">Delete</button>
+                </tr>
+              </div>
+            </tr>
+            <tr>
+            <td>Jojo#2</td>
+            <div class="container">
+              <tr > <!-- *ngFor="let team of teams; index as i" -->
+                <!--{{i+1}} teamName: {{team.teamName}} -->
+                <button type="button" class="btn btn-warning" >Edit</button> <!-- (click)="editTeam(team)" -->
+                <button type="button" class="btn btn-danger" >Delete</button> <!-- (click)="deleteTeam(team)" -->
+              </tr>
+            </div>
+          </tr>
+        </table>
         
         
         <br>

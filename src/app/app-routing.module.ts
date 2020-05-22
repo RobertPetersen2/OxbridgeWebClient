@@ -20,6 +20,7 @@ const routes: Routes = [      //Roters is then you click under the menu bar butt
   { path: 'team-member-pending-approvals',        component: TeamMemberPendingApprovalsComponent  },
   { path: 'races', component: RacesComponent },
   { path: 'race-editor', component: RaceEditorComponent }
+
 ];
 
 

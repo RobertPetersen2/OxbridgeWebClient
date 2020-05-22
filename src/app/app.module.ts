@@ -19,7 +19,7 @@ import { EnrollParticipantComponent } from './enroll-participant/enroll-particip
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RacesComponent } from './races/races.component';
 import { RaceEditorComponent } from './race-editor/race-editor.component';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -32,6 +32,7 @@ import { RaceEditorComponent } from './race-editor/race-editor.component';
     EnrollParticipantComponent,
     RacesComponent,
     RaceEditorComponent
+
   ],
   imports: [
     BrowserModule,

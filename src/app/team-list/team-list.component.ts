@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Team } from '../models/team';
+import { TeamListService} from '../service/team-list.service';
 
 
 @Component({
@@ -11,10 +12,15 @@ export class TeamListComponent implements OnInit {
   
   teams: Team[] = [];
 
-  constructor() { }
+  constructor(private teamList : TeamListService) { }
+
 
   ngOnInit(): void {
-  }
+    const reservationsObservable = this.teamList.getTeamList();
+    reservationsObservable.subscribe((locationData: Team[]) => {
+      this.teams = locationData;
+  })
+}
 
 
   deleteTeam(team:Team):any{

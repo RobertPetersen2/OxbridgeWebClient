@@ -46,12 +46,14 @@ export class EnrollParticipantComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  
 
   click(team:string): void {
     this.selectedTeam = team;
   }
 
 }
+
 
 
 
