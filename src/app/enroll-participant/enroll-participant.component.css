@@ -1,35 +1,51 @@
-input[type=text], input[type=password] { /* Usernmae and password customization */ 
-    width: 100%;
-    padding: 12px 20px;
-    margin: 10px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
-
-  button {  
-    background-color: rgb(255, 0, 170);
+  .buttonDesign {  
+    background-color: rgb(23, 13, 112);
     color: white;
     padding: 14px 20px;
-    margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: 100%;    
+    width: 30%;
+    border-radius: 30px;
+    display: block;
+    margin: auto;
+    left: 50%;
+    
   }
+
+  h1{
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  h3{
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+
 
   .imgcontainer { /*  Where the picture will be placed.  */ 
     text-align: center;
     margin: 24px 0 12px 0;
   }
 
-
-  /* h2.info {
-    text-align: center;
-  } */
-
   .parent {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+  }
+
+  .custom{
+    background-color:Red;
+    width:auto;
+    padding:20px;
+  }
+
+  .center {
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
   }
