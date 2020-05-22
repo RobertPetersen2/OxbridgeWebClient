@@ -15,6 +15,7 @@ import { TeamMemberPendingApprovalsComponent } from './team-member-pending-appro
 import { EnrollParticipantComponent } from './enroll-participant/enroll-participant.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RacesComponent } from './races/races.component';
 
 
 
@@ -26,7 +27,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     RegisterFormComponent,
     TeamListComponent,
     TeamMemberPendingApprovalsComponent,
-    EnrollParticipantComponent
+    EnrollParticipantComponent,
+    RacesComponent
   ],
   imports: [
     BrowserModule,

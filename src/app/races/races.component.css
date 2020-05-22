@@ -1,0 +1,51 @@
+td, th {
+    border: 1px solid #dddddd;  
+    text-align: left;
+    padding: 7px;
+    text-align: center;
+    font-size: 100%;
+    
+    }
+    
+    /* tr:nth-child(even) {
+    background-color: #dddddd;
+    } */
+    
+    
+    .container {
+        width: 160px;
+    }
+    
+    .containerCenter {
+        display: flex;
+        justify-content: center;
+      }
+      .center {
+        width: 800px;
+      }
+    
+    
+    .raceinfo{
+    text-align: left;
+    padding: 7px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 100%;
+    }
+    
+    
+    .location {
+      width: 300px;
+      border: 15px solid #3F51B7;
+      padding: 50px;
+      margin: 20px;
+      text-align: center;
+    }
+    
+    .containterBox{
+      width: 700;
+      position: absolute;
+      border: 0px solid blue;
+      top: 290px;
+      right: 475px;
+    }
