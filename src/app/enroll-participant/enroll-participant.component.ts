@@ -8,6 +8,7 @@ import { FormControl, FormBuilder, Validators } from '@angular/forms';
   templateUrl: './enroll-participant.component.html',
   styleUrls: ['./enroll-participant.component.css']
 })
+
 export class EnrollParticipantComponent implements OnInit {
 
   public infoText:string;
@@ -26,5 +27,6 @@ export class EnrollParticipantComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  
 
 }
