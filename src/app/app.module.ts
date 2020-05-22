@@ -2,8 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
 import { MatInputModule } from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { GoogleMapsModule } from '@angular/google-maps'
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,10 +17,9 @@ import { TeamListComponent } from './team-list/team-list.component';
 import { TeamMemberPendingApprovalsComponent } from './team-member-pending-approvals/team-member-pending-approvals.component';
 import { EnrollParticipantComponent } from './enroll-participant/enroll-participant.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RacesComponent } from './races/races.component';
-
-
+import { RaceEditorComponent } from './race-editor/race-editor.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { RacesComponent } from './races/races.component';
     TeamListComponent,
     TeamMemberPendingApprovalsComponent,
     EnrollParticipantComponent,
-    RacesComponent
+    RacesComponent,
+    RaceEditorComponent
+
   ],
   imports: [
     BrowserModule,
@@ -38,8 +42,10 @@ import { RacesComponent } from './races/races.component';
     MatSelectModule,
     MatInputModule,
     BrowserAnimationsModule,
+    MDBBootstrapModule.forRoot(),
     NgbModule,
-    MDBBootstrapModule.forRoot()
+    GoogleMapsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent],

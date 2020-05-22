@@ -1,31 +1,52 @@
-<form action="/NEXT_PAGE_After_Register" method="post">
-  <div class="imgcontainer">
-      <img src="assets/img/registerLogo.png" alt="Avatar" class="avatar">
-  </div>
+
+<form action="/NEXT_PAGE_After_Register" method="post" style="margin-top: 100px;">
+    <!-- NG IF: YOU ALREADY HAVE A TEAM -->
+
+    <div *ngIf="userEnrollmentStatus===States.HaveTeam">
+        <h1><b>You are currently assigned to:</b></h1>
+        <div>
+            <h3 style="margin-top: 20px;">{{yourTeam}}</h3>
+            <p style="text-align: center;">Pleave the team in order to enter a new one</p>
+            <button onclick="location.href='./home'" class="buttonDesign">Leave</button>
+        </div>
+
+    </div>
 
 
-  <div class="container" layout='row' layout-fill layout-margin layout-align='center'>
-      <h2 class="info"><b>{{infoText}}</b></h2>
-      <p></p>
-      <div class="parrent">
-        <div class="row">
-          <div class="col">
-            <div ngbDropdown class="d-inline-block">
-              <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button>
-              <div class="dropdown-menu" aria-labelledby="dropdownBasic1">
-                <button ngbDropdownItem>Action - 1</button>
-                <button ngbDropdownItem>Another Action</button>
-                <button ngbDropdownItem>Something else is here</button>
-              </div>
+    <!-- NG IF: NO TEAM ASSIGNED -->
+    <div *ngIf="userEnrollmentStatus===States.NoTeam" class="container" layout='row' layout-fill layout-margin layout-align='center'>
+        <h1><b>It doesn't look like you have any team :(</b></h1>
+        <p></p>
+        <div class="center"> Select a team:
+            <div class="row">
+                <div class="col">
+                    <div ngbDropdown class="d-inline-block">
+                        <button class="btn btn-outline-primary" id="dropdownMenu1"
+                            ngbDropdownToggle>{{selectedTeam}}</button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <button class="dropdown-item" *ngFor="let team of teams"
+                                (click)=click(team.teamName)>{{team.teamName}}</button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
           </div>
         </div>
-      </div>
-      <!-- <button type="submit">Register</button>
-      <button onclick="location.href='./login-form'" type="button" class="alrparticbtn">Already participation
-          ?</button> -->
-  </div>
+        <button onclick="location.href='./home'" class="buttonDesign" style="margin-top: 150px;">Confirm</button>
+    </div>
 
-  
+    <!-- NG IF: TEAM ASSIGNED, BUT WAITING APPROVAL -->
+    <div *ngIf="userEnrollmentStatus===States.WaitingApproval">
+        <div class="imgcontainer" >
+            <img style="margin-bottom: 30px;" src="assets/img/clock.png" width="150" alt="Avatar" class="avatar">
+        </div>
+        <div class="container" layout='row' layout-fill layout-margin layout-align='center'>
+            <h1 class="info"><b>Your enrollment is being processed</b></h1>
+            <h3>Please wait for your team leader to approve your request</h3>
+        </div>
+    </div>
+
+
 
 </form>
