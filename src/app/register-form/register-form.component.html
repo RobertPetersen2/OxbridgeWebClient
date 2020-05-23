@@ -1,4 +1,52 @@
-<form action="/NEXT_PAGE_After_Register" method="post">
+<div class="container">
+  <h2>Register</h2>
+  <div class="imgcontainer">
+    <img src="assets/img/registerLogo.png" alt="Avatar" class="avatar">
+  </div>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="fullName">Full Name:</label>
+          <input type="text" formControlName="fullName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }" />
+          <div *ngIf="submitted && f.fullName.errors" class="invalid-feedback">
+              <div *ngIf="f.fullName.errors.required">First Name is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" formControlName="username" class="form-control" placeholder="Enter Username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                <div *ngIf="f.username.errors.required">Username is required</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" formControlName="password" class="form-control" placeholder="Enter Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                <div *ngIf="f.password.errors.required">Password is required</div>
+                <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+            </div>
+        </div>
+        <div class="form-group">
+          <label for="tlCheckbox">Teamleader ?:</label>
+          <input type="checkbox" formControlName="isTeamLeader" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="teamName">Teamname:</label>
+          <input type="text" formControlName="team" class="form-control" placeholder="Enter the name of your new team:" [ngClass]="{ 'is-invalid': submitted && f.team.errors }" />
+          <div *ngIf="submitted && f.team.errors" class="invalid-feedback">
+              <div *ngIf="f.team.errors.required">Teamname is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+            <button [disabled]="loading" class="btn btn-primary">Register</button>
+            <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            <a routerLink="/login-form" class="btn btn-link">Cancel</a>
+        </div>
+    </form>
+  </div>
+
+
+<!-- <form action="/NEXT_PAGE_After_Register" method="post">
     <div class="imgcontainer">
         <img src="assets/img/registerLogo.png" alt="Avatar" class="avatar">
     </div>
@@ -24,4 +72,4 @@
       <button type="submit">Register</button>  
       <button onclick="location.href='./login-form'" type="button" class="alrparticbtn">Already participation ?</button>
     </div>
-</form>
+</form> -->
