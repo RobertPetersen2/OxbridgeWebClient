@@ -1,13 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { GoogleMapsModule } from '@angular/google-maps';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { GoogleMapsModule } from '@angular/google-maps'
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './stuff/jwt.interceptor';
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -21,6 +24,7 @@ import { EnrollParticipantComponent } from './enroll-participant/enroll-particip
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RacesComponent } from './races/races.component';
 import { RaceEditorComponent } from './race-editor/race-editor.component';
+import { HttpClientModule } from '@angular/common/http';
 import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
@@ -48,6 +52,9 @@ import { AlertComponent } from './alert/alert.component';
     MDBBootstrapModule.forRoot(),
     NgbModule,
     GoogleMapsModule,
+    ScrollingModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
     HttpClientModule
 
   ],

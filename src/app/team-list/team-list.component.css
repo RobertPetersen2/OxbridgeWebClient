@@ -16,6 +16,8 @@ background-color: #dddddd;
 
 .container {
     width: 147px;
+    display: flex;
+    width: 100%;
 }
 
 .containerCenter {
@@ -23,5 +25,6 @@ background-color: #dddddd;
     justify-content: center;
   }
   .center {
-    width: 800px;
+    /* width: 800px; */
+    left: 100%;
   }

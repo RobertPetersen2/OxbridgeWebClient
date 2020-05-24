@@ -1,8 +1,75 @@
+<form> DIAGNOSTICS: 
+    {{diagnosticDataRace}}
+    <div class="container">
+        <div class="imgcontainer">
+            <img style="margin-bottom: 30px;" src="assets/img/boat-race.png" width="110" alt="Avatar" class="avatar">
+            <label style="margin-left: 30px;">Manage this race</label>
+        </div>
+        <div class="row">
+            <div class="col">
+                <input type="text" placeholder="Location" name="locName" required>
+            </div>
+            <div class="col">
+                <input [owlDateTimeTrigger]="dt3" [owlDateTime]="dt3" placeholder="Date">
+                <owl-date-time [pickerType]="'calendar'" #dt3></owl-date-time>
+            </div>
+            <div class="col">
+                <input [owlDateTimeTrigger]="dt4" [owlDateTime]="dt4" placeholder="Time">
+                <owl-date-time [pickerType]="'timer'" #dt4></owl-date-time>
+            </div>
+            <div class="col">
+                <button class="saveBtn" style="width: 90%; margin: 10px; padding: 15px;">Save</button>
+            </div>
+        </div>
+        <div class="row" style="margin: 10px;">
+            <div class="col">
+                <h3 style="text-align: center;">Click on the map to place a checkpoint</h3>
+            </div>
+        </div>
+        <div class="row" style="margin: 20px;">
+            <div class="col" >
+                <div style="border:5px solid black;">
+                    <google-map width="100%" [zoom]="zoom" [center]="center" [options]="options" (mapClick)="click($event)" >
+                        <map-marker *ngFor="let marker of markers" [position]="marker.position" [label]="marker.label"
+                            [title]="marker.title" [options]="marker.options" >
+                        </map-marker>
+                    </google-map>
+                </div>
+            </div>
+            <div class="col-5" >
+                <div style="border:5px solid black; height: 510px;" >
+                    <!-- Setting width to 101% had to be done in order to avoid a white vertical line at the end -->
+                    <table class="myTable" mdbTable mdbTableScroll scrollY="true" scrollX="false" maxHeight=500 style="width: 101%;" > 
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Checkpoint No.</th>
+                                <th scope="col">Latitude</th>
+                                <th scope="col" >Longitude</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let marker of markers">
+                            <tr>
+                                <th scope="row">{{marker.checkpointNo}}</th>
+                                <td>{{marker.position.lat}}</td>
+                                <td>{{marker.position.lng}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" style="text-align: center;">
+            <!-- Use custom zoom buttons -->
+            <button class="btn btn-outline-primary" (click)="zoomIn()">Zoom in</button>
+            <button class="btn btn-outline-primary" (click)="zoomOut()">Zoom out</button>
+            <button class="btn btn-danger" (click)="undoMarker()">Undo newest marker</button>
+            <!-- <button class="btn btn-outline-primary" (click)="addMarker()">Add marker</button> -->
+            </div>
+            <div class="col">
+                <h6 style="text-align: center;">All checkpoints will be ordered by number. If you misplaced a checkpoint please press the undo and place a new one</h6>
+            </div>
 
-<google-map
-height="100vh"
-width="100%"
-[zoom]="zoom"
-[center]="center"
-[options]="options"
-></google-map>
+        </div>
+    </div>
+</form>
