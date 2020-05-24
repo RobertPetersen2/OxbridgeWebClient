@@ -1,0 +1,77 @@
+.center {
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+
+input { 
+    width: 100%;
+    padding: 12px 20px;
+    margin: 10px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    height: 50px;
+    font-size: small;
+    border-radius: 10px;
+}
+
+input:focus {
+    outline: none !important;
+    border:1px solid rgb(0, 0, 0);
+    box-shadow: 0 0 10px #719ECE;
+}
+
+
+/* .datetimeDesign { 
+    width: 100%;
+    padding: 12px 20px;
+    margin: 10px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    height: 30px;
+    font-family: Arial;
+    font-size: small;
+  
+} */
+
+.imgcontainer { /*  Where the picture will be placed.  */ 
+    text-align: center;
+    margin: 24px 0 12px 0;
+  }
+
+label{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.btn{
+    padding: 15px;
+    margin-left: 20px;
+}
+
+.saveBtn{
+    height: 50px;
+    margin-left: 20px;
+    background-color: rgb(135, 191, 224);
+    border-radius: 5px;
+    border-color: transparent;
+    color: white;
+    border-width: 1px;
+}
+
+button:focus {
+    outline: none !important;
+    border:1px solid rgb(0, 0, 0);
+    box-shadow: 0 0 10px #719ECE;
+}
+
+.myTable 
+{
+    table-layout:fixed;
+    height:100%;
+    overflow-y: hidden;
+    word-break: break-all 
+}
+
