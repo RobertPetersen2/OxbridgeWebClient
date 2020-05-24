@@ -26,3 +26,7 @@ input[type=text], input[type=password] { /* Usernmae and password customization 
   h2.info {
     text-align: center;
   }
+
+  h2.headertekst {
+    text-align: center;
+  }
