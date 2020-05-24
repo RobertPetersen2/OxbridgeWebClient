@@ -50,10 +50,11 @@
           <div class="btn-group" mdbDropdown> 
             <mdb-icon fas icon="user" mdbDropdownToggle></mdb-icon>
             <div class="dropdown-menu dropdown-menu-right dropdown-primary">
-              <a class="dropdown-item" href="#" routerLink="/register-form" routerLinkActive="active">Sign-up</a>
-              <a class="dropdown-item" href="#">Profile</a>
+              <a class="dropdown-item" *ngIf="!currentUser" href="#" routerLink="/register-form" routerLinkActive="active">Sign-up</a>
+              <a class="dropdown-item" *ngIf="currentUser" href="#">Profile</a>
               <div class="divider dropdown-divider"></div>
-              <a class="dropdown-item" href="#" routerLink="/login-form" routerLinkActive="active">Login</a>
+              <a class="dropdown-item" *ngIf="!currentUser"  href="#" routerLink="/login-form" routerLinkActive="active">Login</a>
+              <a class="dropdown-item" *ngIf="currentUser" (click)="logout()">Logout</a>
 
             </div>
           </div>

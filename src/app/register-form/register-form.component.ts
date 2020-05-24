@@ -30,8 +30,8 @@ export class RegisterFormComponent implements OnInit {
       fullName: ['', Validators.required],
       username: ['', Validators.required],
       password: ['', Validators.required],
-      isTeamLeader: ['', Validators.required],
-      team: ['', [Validators.required, Validators.minLength(6)]]
+      isTeamLeader: [''],
+      team: ['', [Validators.minLength(6)]]
   });
   }
 
@@ -58,7 +58,7 @@ export class RegisterFormComponent implements OnInit {
             error => {
                 this.alertService.error(error.error);
                 this.loading = false;
-                console.log(error)
+                console.log(error);
             });
   }
 }
