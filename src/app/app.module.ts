@@ -8,6 +8,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GoogleMapsModule } from '@angular/google-maps'
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './stuff/jwt.interceptor';
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -22,7 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RacesComponent } from './races/races.component';
 import { RaceEditorComponent } from './race-editor/race-editor.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,8 @@ import { HttpClientModule } from '@angular/common/http';
     TeamMemberPendingApprovalsComponent,
     EnrollParticipantComponent,
     RacesComponent,
-    RaceEditorComponent
+    RaceEditorComponent,
+    AlertComponent
 
   ],
   imports: [
@@ -54,7 +58,9 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule
 
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
 
 })
