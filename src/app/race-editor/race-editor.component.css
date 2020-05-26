@@ -75,3 +75,6 @@ button:focus {
     word-break: break-all 
 }
 
+.ng-invalid:not(form)  { /* invalid input*/
+    border-left: 5px solid #a94442; 
+  }
