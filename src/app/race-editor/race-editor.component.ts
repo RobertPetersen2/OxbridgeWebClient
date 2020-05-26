@@ -3,6 +3,8 @@ import { MapMarker } from '@angular/google-maps';
 import { CheckPoint } from '../models/check-point';
 import { Race } from '../models/race';
 import { RaceServiceService } from '../service/race-service.service';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -10,6 +12,7 @@ import { RaceServiceService } from '../service/race-service.service';
   templateUrl: './race-editor.component.html',
   styleUrls: ['./race-editor.component.css']
 })
+
 export class RaceEditorComponent implements OnInit {
 
   // Google Maps related properties
@@ -28,34 +31,34 @@ export class RaceEditorComponent implements OnInit {
   public markers: Array<object> = [];
 
   // Essential data
-  public currentRace:Race;
+  public currentRace: Race;
+  public diagnosticDataRace: any; // <--- DIAGNOSTICS / DEBUGGING
 
-  public diagnosticDataRace: any;
+  // Form
+  public raceEditForm: FormGroup;
 
-  public allRaces:Race[]; // <--- should be moved to race component - this is only testing
-  // public raceID: number;
-  // public checkPoints: Array<CheckPoint>;
-  // public startTime:Date;
-  // public locationDescription:string;
-  // public laps: number;
+  private returnUrl:string
 
-
-
-  constructor(private raceService : RaceServiceService) { 
-    const racesObservable = this.raceService.getRaces();
-    racesObservable.subscribe((raceData: Race[]) => {
-    this.allRaces = raceData;
-    console.log(this.allRaces);
-    });
-
-    const specificRaceObservable = this.raceService.getSpecificRace(1);
+  constructor(
+    private raceService: RaceServiceService, 
+    private formBuilder: FormBuilder, 
+    private router:Router,
+    private route:ActivatedRoute,
+    ) {
+    // Subscribing to the race of the backend
+    const specificRaceObservable = this.raceService.getSpecificRace(999); // <-- THIS HAS TO BE SOME THING YOU CAN SPECIFY FROM RACES.COMPONENT
     specificRaceObservable.subscribe((raceData: Race) => {
-    this.currentRace = raceData;
-    this.diagnosticDataRace = JSON.stringify(raceData);
-    console.log(this.currentRace);
+      // Correct date and time
+      var dateTimeFixed = new Date(raceData.startTime);
+      this.currentRace = raceData;
+      this.currentRace.startTime = dateTimeFixed;
+
+      // DIAGNOSTICS - DEBUGGING
+      this.diagnosticDataRace = JSON.stringify(this.currentRace); // <--- DIAGNOSTICS / DEBUGGING
+      console.log(this.currentRace);
+      // Load the check points when data is loaded
+      this.loadCheckpoints();
     });
-
-
   }
 
   ngOnInit(): void {
@@ -65,27 +68,16 @@ export class RaceEditorComponent implements OnInit {
         lng: position.coords.longitude,
       }
     });
+
+    // We create our Reactive Form using Form Builder and set the validators
+    this.raceEditForm = this.formBuilder.group({
+      location: ['', [Validators.minLength(2), Validators.required]],
+      date: ['', [Validators.minLength(6), Validators.required]],
+      time: ['', [Validators.minLength(6), Validators.required]],
+    });
+
+    this.returnUrl = '/races';
   }
-
-  // // Testing purposes: 
-  // myLat = 54.9093;
-  // myLong = 9.8074;
-
-  // // Adds a random location - only meant for testing
-  // addMarker() {
-  //   this.markers.push({
-  //     position: {
-  //       lat: this.center.lat + ((Math.random() - 0.5) * 2) / 10,
-  //       lng: this.center.lng + ((Math.random() - 0.5) * 2) / 10,
-  //     },
-  //     label: {
-  //       color: 'red',
-  //       text: 'Marker label ' + (this.markers.length + 1),
-  //     },
-  //     title: 'Marker title ' + (this.markers.length + 1),
-  //     options: { animation: google.maps.Animation.BOUNCE },
-  //   })
-  // }
 
   zoomIn() {
     if (this.zoom < this.options.maxZoom) this.zoom++
@@ -95,7 +87,7 @@ export class RaceEditorComponent implements OnInit {
     if (this.zoom > this.options.minZoom) this.zoom--
   }
 
-  click(event: google.maps.MouseEvent){
+  addCurrentLocation(event: google.maps.MouseEvent) {
     console.log(event);
     this.markers.push({
       position: {
@@ -108,18 +100,75 @@ export class RaceEditorComponent implements OnInit {
       },
       title: 'Checkpoint ' + (this.markers.length + 1),
       options: { animation: google.maps.Animation.BOUNCE },
-      checkpointNo: (this.markers.length +1),
+      checkpointNo: (this.markers.length + 1),
     });
+
+    // This one is saved for the json
+    this.currentRace.checkPoints.push(
+      {
+        latitude: event.latLng.lat(),
+        longitude: event.latLng.lng(),
+      }
+    );
+
+  }
+
+  loadCheckpoints() {
+    // Get a reference to this
+    var self = this;
+ 
+    // Iterate through all the checkpoints from the loaded data
+    this.currentRace.checkPoints.forEach(function (value) {
+      console.log("Pushed new value to array: " + value.latitude + " and " + value.longitude);
+      // We place it in the markers array as it contains display data, that we would normally not save in the model
+      self.markers.push({
+        position: {
+          lat: value.latitude,
+          lng: value.longitude
+        },
+        label: {
+          color: 'red',
+          text: 'Checkpoint ' + (self.markers.length + 1),
+        },
+        title: 'Checkpoint ' + (self.markers.length + 1),
+        options: { animation: google.maps.Animation.BOUNCE },
+        checkpointNo: (self.markers.length + 1),
+      });
+    });
+
   }
 
 
 
-  undoMarker(){
-    this.markers.splice(-1,1)
+  undoMarker() {
+    this.markers.splice(-1, 1)
+    // This one is saved for the json that we post to the server
+    this.currentRace.checkPoints.splice(-1,1);
   }
 
-  submit(){
+  submit() {
+
+
+    if(this.raceEditForm.invalid || this.raceEditForm.untouched){
+      console.log("Invalid input");
+      return;
+    }
+
+    console.log("Submit was executed!");
+    // Get all the data together and send it as a JSON to the server under the ID
+    console.log("Server will send this info to the backend: ");
+    console.log(this.currentRace);
+    // POST IT -> And print the result in the console for debugging reasons 
+    const response = this.raceService.postRace(this.currentRace);
+    response.subscribe((response: any) => {
+      console.log("Response from the server: ");
+      console.log(response);
+    });
+    // Return to previous page
+    this.router.navigate([this.returnUrl]);
 
   }
+
+
 
 }

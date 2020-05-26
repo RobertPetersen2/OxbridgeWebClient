@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Race } from '../models/race';
 import { CheckPoint } from '../models/check-point';
 import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +55,7 @@ export class RaceServiceService {
   }];
 
 
+
   public getRaces(): Observable<Race[]> {
     // const racesObservable = new Observable<Race[]>(observer => {
     //        setTimeout(() => {
@@ -69,6 +71,10 @@ export class RaceServiceService {
 
     return this.http.get<Race>('http://148.251.122.228:3000/races/'+raceID);
   }
+
+  public postRace(race:Race): Observable<any> {
+    return this.http.post<any>('http://148.251.122.228:3000/races', race);
+}
 
 
 }

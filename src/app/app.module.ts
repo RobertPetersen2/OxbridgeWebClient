@@ -24,7 +24,6 @@ import { EnrollParticipantComponent } from './enroll-participant/enroll-particip
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RacesComponent } from './races/races.component';
 import { RaceEditorComponent } from './race-editor/race-editor.component';
-import { HttpClientModule } from '@angular/common/http';
 import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
