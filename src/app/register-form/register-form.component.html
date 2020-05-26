@@ -6,10 +6,10 @@
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="fullName">Full Name:</label>
-          <input type="text" formControlName="fullName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }" minlength="2" pattern="^([A-Z])[a-z]*" />
+          <input type="text" formControlName="fullName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }" placeholder="Full name" />
           <div *ngIf="submitted && f.fullName.errors" class="invalid-feedback" >
               <div *ngIf="f.fullName.errors.required">First Name is required</div>
-              <div *ngIf="f.fullName.errors.required">Full Name should be at least 2 characters long.</div> <!-- Added min lenght-->
+              <div *ngIf="f.fullName.errors.minlength">Full Name should be at least 2 characters long.</div> <!-- Added min lenght-->
               <div *ngIf="f.fullName.errors.pattern">
                 First Name must begin with a capital letter and other letters must be small.
             </div>
@@ -17,10 +17,10 @@
         </div>
         <div class="form-group">
             <label for="username">Username:</label>
-            <input type="text" formControlName="username" class="form-control" placeholder="Enter Username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" minlength="2" pattern="^([A-Z])[a-z]*"  />
+            <input type="text" formControlName="username" class="form-control" placeholder="Enter Username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }"   />
             <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
                 <div *ngIf="f.username.errors.required">Username is required</div>
-                <div *ngIf="f.username.errors.required">Username should be at least 2 characters long</div>
+                <div *ngIf="f.username.errors.minlength">Username should be at least 2 characters long</div>
                 <div *ngIf="f.username.errors.pattern">
                  Username must begin with a capital letter and other letters must be small.
               </div>
@@ -28,22 +28,24 @@
         </div>
         <div class="form-group">
             <label for="password">Password:</label>
-            <input type="password" formControlName="password" class="form-control" placeholder="Enter Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" minlength="6" />
+            <input type="password" formControlName="password" class="form-control" placeholder="Enter Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"  />
             <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                 <div *ngIf="f.password.errors.required">Password is required</div>
-                <div *ngIf="f.password.errors.required">Password must be at least 6 characters</div>
+                <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
             </div>
         </div>
         <div class="form-group">
-          <label for="tlCheckbox">Teamleader ?:</label>
-          <input type="checkbox" formControlName="isTeamLeader" class="form-control"/>
+          <h6 for="tlCheckbox">Are you a Team Leader?:</h6>
+          <input type="checkbox" formControlName="isTeamLeader" class="form-control move-left" style="margin: 0px;"/>
         </div>
         <div class="form-group">
-          <label for="teamName">Teamname:</label>
-          <input type="text" formControlName="team" class="form-control" placeholder="Enter the name of your new team:" [ngClass]="{ 'is-invalid': submitted && f.team.errors }" />
-          <div *ngIf="submitted && f.team.errors" class="invalid-feedback">
-              <div *ngIf="f.team.errors.required">Teamname is required</div>
-              <div *ngIf="f.team.errors.required">Team name must be at least 6 characters</div>
+          <div *ngIf="f.isTeamLeader.value==true">
+            <label for="teamName">Teamname:</label>
+            <input type="text" formControlName="team" class="form-control" placeholder="Enter the name of your new team:" [ngClass]="{ 'is-invalid': submitted && f.team.errors }" />
+            <div *ngIf="submitted && f.team.errors" class="invalid-feedback">
+                <div *ngIf="f.team.errors.required">Teamname is required</div>
+                <div *ngIf="f.team.errors.minlength">Team name must be at least 6 characters</div>
+            </div>
           </div>
         </div>
         <div class="form-group">
