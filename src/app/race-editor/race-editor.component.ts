@@ -46,19 +46,37 @@ export class RaceEditorComponent implements OnInit {
     private route:ActivatedRoute,
     ) {
     // Subscribing to the race of the backend
-    const specificRaceObservable = this.raceService.getSpecificRace(999); // <-- THIS HAS TO BE SOME THING YOU CAN SPECIFY FROM RACES.COMPONENT
-    specificRaceObservable.subscribe((raceData: Race) => {
-      // Correct date and time
-      var dateTimeFixed = new Date(raceData.startTime);
-      this.currentRace = raceData;
-      this.currentRace.startTime = dateTimeFixed;
+    const selectedRace = this.raceService.getSelectedRaceID();
+    selectedRace.subscribe((raceIDSelected: number) => {
+      const specificRaceObservable = this.raceService.getSpecificRace(raceIDSelected); // <-- THIS ONE IS RECEIVED FROM THE RACES COMPONENT
+      specificRaceObservable.subscribe((raceData: Race) => {
+        // Correct date and time
+        var dateTimeFixed = new Date(raceData.startTime);
+        this.currentRace = raceData;
+        this.currentRace.startTime = dateTimeFixed;
+  
+        // DIAGNOSTICS - DEBUGGING
+        this.diagnosticDataRace = JSON.stringify(this.currentRace); // <--- DIAGNOSTICS / DEBUGGING
+        console.log(this.currentRace);
 
-      // DIAGNOSTICS - DEBUGGING
-      this.diagnosticDataRace = JSON.stringify(this.currentRace); // <--- DIAGNOSTICS / DEBUGGING
-      console.log(this.currentRace);
-      // Load the check points when data is loaded
-      this.loadCheckpoints();
-    });
+        // Load the check points when data is loaded
+        this.loadCheckpoints();
+      });
+    })
+
+    // const specificRaceObservable = this.raceService.getSpecificRace(999); // <-- THIS HAS TO BE SOME THING YOU CAN SPECIFY FROM RACES.COMPONENT
+    // specificRaceObservable.subscribe((raceData: Race) => {
+    //   // Correct date and time
+    //   var dateTimeFixed = new Date(raceData.startTime);
+    //   this.currentRace = raceData;
+    //   this.currentRace.startTime = dateTimeFixed;
+
+    //   // DIAGNOSTICS - DEBUGGING
+    //   this.diagnosticDataRace = JSON.stringify(this.currentRace); // <--- DIAGNOSTICS / DEBUGGING
+    //   console.log(this.currentRace);
+    //   // Load the check points when data is loaded
+    //   this.loadCheckpoints();
+    // });
   }
 
   ngOnInit(): void {
@@ -160,10 +178,12 @@ export class RaceEditorComponent implements OnInit {
     console.log(this.currentRace);
     // POST IT -> And print the result in the console for debugging reasons 
     const response = this.raceService.postRace(this.currentRace);
-    response.subscribe((response: any) => {
-      console.log("Response from the server: ");
-      console.log(response);
-    });
+    // response.subscribe((response: any) => {
+    //   console.log("Response from the server: ");
+    //   console.log(response);
+    //   // Lets assume that the data was inserted. We then need to refresh the list
+    //   this.raceService.getRaces();
+    // });
     // Return to previous page
     this.router.navigate([this.returnUrl]);
 

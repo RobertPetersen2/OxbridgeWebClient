@@ -11,10 +11,7 @@ td, th {
     background-color: #dddddd;
     } */
     
-    
-    .container {
-        width: 160px;
-    }
+     
     
     .containerCenter {
         display: flex;
@@ -34,7 +31,7 @@ td, th {
     }
     
     
-    .location {
+    .box {
       width: 300px;
       border: 15px solid #3F51B7;
       padding: 50px;
@@ -49,3 +46,5 @@ td, th {
       top: 300px;
       right: 505px;
     }
+
+    
