@@ -3,9 +3,18 @@
 
 
 <div class="container">
-<img src="assets/img/homeRace.png" alt="MainPicture" width="500" height="333" style="float: left;"> 
-<h1> Oxbridge Race: </h1>
 <div class="text-block">
+  <mdb-carousel [animation]="'slide'">
+    <mdb-carousel-item>
+      <img class="d-block w-100" src="assets/img/homepic.jpg" alt="First slide" width="400" height="400">
+    </mdb-carousel-item>
+    <mdb-carousel-item>
+      <img class="d-block w-100" src="assets/img/pic11.png" alt="Second slide" width="400" height="400">
+    </mdb-carousel-item>
+    <mdb-carousel-item>
+      <img class="d-block w-100" src="assets/img/race123.jpg" alt="Third slide" width="400" height="400">
+    </mdb-carousel-item>
+  </mdb-carousel>
     <img src="assets/img/pin.png" alt="pin" style="float:left"> 
     <h3> Kommende begivenhed </h3>
     <p>Her i @TSRaalborg - The Tall Ships Races Aalborg / Aalborg Events venter ferien om hjørnet. 
@@ -16,8 +25,11 @@
 <br>
 <br>
 <br>
+<br>
+<br>
 
-<!-- 
+
+<!--
 <mdb-carousel [isControls]="true" class="carousel-multi-item multi-animation" [type]="'carousel-multi-item'"
               [animation]="'slide'">
   <mdb-carousel-item *ngFor="let item of slides; let i = index">
@@ -34,4 +46,84 @@
       </mdb-card>
     </div>
   </mdb-carousel-item>
-</mdb-carousel> -->
+</mdb-carousel>
+<br>
+<br>
+<br>
+-->
+
+<div class="container marketing">
+
+  <!-- Three columns of text below the carousel -->
+  <div class="row">
+    <div class="col-lg-4">
+      <img class="rounded-circle" src="assets/img/racehome.png" alt="Generic placeholder image" width="140" height="140">
+      <h2>Races</h2>
+      <p>Check races right now. There is a battle on the water. Live stream now.</p>
+      <p><a class="btn btn-secondary" href="/races" role="button">Check it now »</a></p>
+    </div><!-- /.col-lg-4 -->
+    <div class="col-lg-4">
+      <img class="rounded-circle" src="assets/img/team.png" alt="Generic placeholder image" width="140" height="140">
+      <h2>Your team</h2>
+      <p>Pick your team , you can edit your team , you can delete members , you can add a new members. But first you need to login.</p>
+      <p><a class="btn btn-secondary" href="/login-form" role="button">Login now »</a></p>
+    </div><!-- /.col-lg-4 -->
+    <div class="col-lg-4">
+      <img class="rounded-circle" src="assets/img/registerhome.jpg" alt="Generic placeholder image" width="140" height="140">
+      <h2>Register</h2>
+      <p>If you want to register and feel the wind , you are welcome just register right now and tailwind to you.</p>
+      <p><a class="btn btn-secondary" href="register-form" role="button">Register now »</a></p>
+    </div><!-- /.col-lg-4 -->
+  </div><!-- /.row -->
+
+
+  <!-- START THE FEATURETTES -->
+
+  <hr class="featurette-divider">
+
+  <div class="row featurette">
+    <div class="col-md-7">
+      <h2 class="featurette-heading">From state school to the Boat Race: <span class="text-muted">Alice Roberts rows against the tide.</span></h2>
+      <p class="lead">The Oxford teenager, who is preparing to compete in the 73rd edition of the women’s event, is bucking the trend of rowing as an elitist sport.</p>
+    </div>
+    <div class="col-md-5">
+      <img class="featurette-image img-fluid mx-auto"  style="width: 500px; height: 300px;" src="assets/img/pic1.jpg" data-holder-rendered="true">
+    </div>
+  </div>
+
+  <hr class="featurette-divider">
+
+  <div class="row featurette">
+    <div class="col-md-7 order-md-2">
+      <h2 class="featurette-heading">Boat Race 2018: Cambridge beat Oxford in men's and women's race<span class="text-muted">– as it happened.</span></h2>
+      <p class="lead">Cambridge led from the front in the men’s and women’s races to win both events for the first time since the women’s race moved to the Tideway in 2015</p>
+    </div>
+    <div class="col-md-5 order-md-1">
+      <img class="featurette-image img-fluid mx-auto" src="assets/img/thebois.jpg" data-holder-rendered="true" style="width: 500px; height: 300px;">
+    </div>
+  </div>
+
+  <hr class="featurette-divider">
+
+  <div class="row featurette">
+    <div class="col-md-7">
+      <h2 class="featurette-heading">Bomb scare can’t dampen festivities  <span class="text-muted">as Oxford and Cambridge both score wins.</span></h2>
+      <p class="lead">A day that began with a bomb scare ended with an explosion of joy from the Oxford supporters assembled at the finish line of the 163rd Boat Race.
+      </p>
+    </div>
+    <div class="col-md-5">
+      <img class="featurette-image img-fluid mx-auto"   src="assets/img/pic3.jpg" data-holder-rendered="true" style="width: 500px; height: 300px;">
+    </div>
+  </div>
+
+  <hr class="featurette-divider">
+
+  <!-- /END THE FEATURETTES -->
+
+</div>
+
+<footer class="container">
+  <p class="float-right"><a href="#" onlick>Back to top</a></p>
+  <p>© 2020 Oxbridge Race by TheBoisFromTheHood  · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
+</footer>
+
