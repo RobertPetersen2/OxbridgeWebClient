@@ -4,49 +4,26 @@
     <h4 class="approved"> Users to be approved</h4>
     </div>
 
-    <table>
-        <tr> 
-          <th>Username</th>
-          <th>Team Assigment</th>
-          <th>Approvet</th>
-        </tr>
-        <tr>
-          <td>Bruce Wayne</td>
-          <td>BOIS FROM DA HOOD</td>
-          <td>
-            <button type="button" class="btn btn-success">Accept</button>
-            <button type="button" class="btn btn-danger">Delete</button>
-          </td>
-        </tr>
-        <tr>
-          <td>Tony Stark</td>
-          <td>BOIS FROM DA HOOD</td>
-          <td>
-            <button type="button" class="btn btn-success">Accept</button>
-            <button type="button" class="btn btn-danger">Delete</button>
-          </td>
-        </tr>
-        <tr>
-          <td>SvampeBob Firkant</td>
-          <td>BOIS FROM DA HOOD</td>
-          <td>
-            <button type="button" class="btn btn-success">Accept</button>
-            <button type="button" class="btn btn-danger">Delete</button>
-          </td>
-        </tr>
-        <tr>
-          <td>Patrick Star</td>
-          <td>BOIS FROM DA HOOD</td>
-          <td>
-            <button type="button" class="btn btn-success">Accept</button>
-            <button type="button" class="btn btn-danger">Delete</button>
-          </td>
-        </tr>
-        <tr>
-            <td>Bob Ross</td>
-            <td>BOIS FROM DA HOOD</td>
-            <td>
-            <button type="button" class="btn btn-success">Accept</button>
-            <button type="button" class="btn btn-danger">Delete</button>
+    <div class="col">
+      <div class="mat-elevation-z8" style="border:1px solid black; height: 300px;">
+        <table mdbTable mdbTableScroll scrollY="true" scrollX="false" maxHeight=600>
+          <thead class="indigo darken-3 white-text ">
+            <tr>
+              <th>Username</th>
+              <th>Team Assigment</th>
+              <th>Approvet</th>
+            </tr>
+          </thead>
+          <tbody> 
+            <tr>
+              <th scope="row"> Bruse Wayne</th>
+              <th>BoisFromDaHood</th>
+              <td >
+                <button  type="button" class="btn btn-danger" style="float: right;" >Delete</button>
+                <button  accepttype="button" class="btn btn-success" style="float: right;">Accept</button>
               </td>
-        </tr>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>

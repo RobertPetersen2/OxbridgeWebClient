@@ -10,7 +10,7 @@ import { TeamListService} from '../service/team-list.service';
 })
 export class TeamListComponent implements OnInit {
   
-  teams: Team[] = [];
+  public teams: Team[] = []; 
 
   constructor(private teamList : TeamListService) { }
 

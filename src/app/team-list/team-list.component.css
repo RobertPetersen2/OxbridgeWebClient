@@ -1,30 +1,10 @@
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 10%;
-  }
-
 td, th {
-border: 1px solid #dddddd;  
-text-align: left;
-padding: 7px;
-}
-
-tr:nth-child(even) {
-background-color: #dddddd;
-}
-
-.container {
-    width: 147px;
-    display: flex;
-    width: 100%;
-}
-
-.containerCenter {
-    display: flex;
-    justify-content: center;
+  border: 1px solid #dddddd;  
+  text-align: left;
+  padding: 7px;
+  text-align: right;
+  font-size: 100%;
   }
-  .center {
-    /* width: 800px; */
-    left: 100%;
-  }
+
+
+  

@@ -1,22 +1,53 @@
 <p></p>
 <br>
 <br>
-<div class="containerCenter">
-    <div class="center">
-        <table style="float: left;">
+<div class="container">
+  <div class="row">
+    <div class="col" >
+      <div class="mat-elevation-z8" style="border:1px solid black; height: 200px; ">
+        <table mdbTable mdbTableScroll scrollY="true" scrollX="false" maxHeight=400   >
+          <thead class="indigo darken-3 white-text   ">
             <tr>
-              <th>Team name: </th>
+              <th>Team name</th>
+              <th>Modify <b>(Admin part)</b></th>
             </tr>
+          </thead>
+          <tbody *ngFor="let team of teams"> 
             <tr>
-                <td>TheBoisFromDaHood</td> 
-                <div class="container">
-                  <tr>
-                    <button type="button" class="btn btn-warning" >Edit</button>
-                    <button type="button" class="btn btn-danger">Delete</button>
-                  </tr>
-                </div>
-              </tr>
+              <th scope="row"> {{team.teamName}}</th> <!-- Adding a team in the row.-->
+              <td>
+                <button type="button" class="btn btn-warning" >Edit</button>
+                <button type="button" class="btn btn-danger" >Delete</button>
+              </td>
+            </tr>
+          </tbody>
         </table>
+      </div>
+    </div>
+
+    <!-- OTher table to the right !-->
+    <div class="col">
+      <div class="mat-elevation-z8" style="border:1px solid black; height: 200px; ">
+        <table mdbTable mdbTableScroll scrollY="true" scrollX="false" maxHeight=400>
+          <thead class="indigo darken-3 white-text   table-layout: auto; ">
+            <tr>
+              <th>Team name</th>
+              <th>Modify <b>(Leader part)</b></th>
+            </tr>
+          </thead>
+          <tbody> 
+            <tr>
+              <th scope="row"> Team Sønderborg</th>
+              <td>
+                <button type="button" class="btn btn-danger" >Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
         
         
         
@@ -30,7 +61,7 @@
                 <button type="button" class="btn btn-danger" (click)="deleteTeam(team)">Delete</button>
             </tr>
         </table> -->
-        
+<!--       
         <table style="float: right; width: 400px;">
           <tr>
             <th>Team Leader: </th>
@@ -48,33 +79,18 @@
             <tr>
             <td>Jojo#2</td>
             <div class="container">
-              <tr > <!-- *ngFor="let team of teams; index as i" -->
-                <!-- {{i+1}} teamName: {{team.teamName}} -->
-                <button type="button" class="btn btn-warning" >Edit</button> <!-- (click)="editTeam(team)" -->
-                <button type="button" class="btn btn-danger" >Delete</button> <!-- (click)="deleteTeam(team)" -->
+              <tr 
+              
+                <button type="button" class="btn btn-warning" >Edit</button> 
+                <button type="button" class="btn btn-danger" >Delete</button>  (click)="deleteTeam(team)" 
               </tr>
             </div>
           </tr>
         </table>
         
         
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+        <br> -->
         
         
-        
-        
-        <td ng-click="editUser(user)">
-            <input type="text" name="firstName" ng-show="user.editMode" class="form-control" ng-model="user.firstName" placeholder="TheBoisFromDaHood" value="TheBoisFromDaHood" required="" />
-          </td>
-          <td>
-            <a href="" ng-hide="user.editMode" ng-click="editUser(user)">Create</a>
-    </div>
+      
 </div>
