@@ -1,3 +1,3 @@
 export class Team {
-    constructor( public teamName: string){}
+    constructor(public teamName: string){}
 }

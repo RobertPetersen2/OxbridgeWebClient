@@ -13,7 +13,7 @@
         <a class="nav-link waves-light" mdbWavesEffect routerLink="/home" routerLinkActive="active">
           Home<span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item" *ngIf="currentUser?.isAdmin == true || currentUser?.isTeamLeader == true " [routerLinkActive]="['active']">
+      <li class="nav-item" *ngIf="currentUser?.isAdmin == true" [routerLinkActive]="['active']">
         <a class="nav-link waves-light"  mdbWavesEffect routerLink="/races" routerLinkActive="active">
           Races</a>
       </li>
@@ -21,11 +21,11 @@
         <a class="nav-link waves-light" mdbWavesEffect routerLink="/team-list" routerLinkActive="active">
           Teams</a>
       </li>
-      <li class="nav-item" *ngIf="currentUser" [routerLinkActive]="['active']">
+      <li class="nav-item" *ngIf="currentUser && currentUser?.isAdmin == false && currentUser?.isTeamLeader == false" [routerLinkActive]="['active']">
         <a class="nav-link waves-light" mdbWavesEffect routerLink="/enroll-participant" routerLinkActive="active">
           Participant Enrollment</a>
       </li>
-      <li class="nav-item" *ngIf="currentUser?.isAdmin == true || currentUser?.isTeamLeader == true ">
+      <li class="nav-item" *ngIf="currentUser?.isTeamLeader == true ">
         <a class="nav-link waves-light" mdbWavesEffect routerLink="/team-member-pending-approvals"
           routerLinkActive="active">
           Pending Approvals</a>
