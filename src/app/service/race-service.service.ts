@@ -92,7 +92,7 @@ export class RaceServiceService {
             }
          }
         },
-       error => console.log("ERROR MESSAGE:" + JSON.stringify(error))
+       error => console.log("Error Message:" + JSON.stringify(error))
      );
   }
 

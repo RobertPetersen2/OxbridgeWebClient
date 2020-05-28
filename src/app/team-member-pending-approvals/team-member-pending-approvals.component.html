@@ -1,29 +1,32 @@
-<div class="container">
-    <h2 class="info"><b> Your team is : ________(BOIS FROM DA HOOD) </b></h2>
+<div class="container" style="margin-top: 100px;">
+    <h2 class="info"><b> Your team: </b></h2>
+    <h4 class="info">{{yourTeam}}</h4>
     <br>
-    <h4 class="approved"> Users to be approved</h4>
-    </div>
-
-    <div class="col">
-      <div class="mat-elevation-z8" style="border:1px solid black; height: 300px;">
+    <h5> <b>Users to be approved:</b></h5>
+    <div>
+      <div class="mat-elevation-z8" >
         <table mdbTable mdbTableScroll scrollY="true" scrollX="false" maxHeight=600>
           <thead class="indigo darken-3 white-text ">
             <tr>
               <th>Username</th>
               <th>Team Assigment</th>
-              <th>Approvet</th>
+              <th style="text-align: right;">Approve/Reject</th>
             </tr>
           </thead>
-          <tbody> 
+          <tbody *ngFor="let user of pendingApprovals"> 
             <tr>
-              <th scope="row"> Bruse Wayne</th>
-              <th>BoisFromDaHood</th>
+              <th scope="row">{{user.username}}</th>
+              <th>{{user.team}}</th>
               <td >
-                <button  type="button" class="btn btn-danger" style="float: right;" >Delete</button>
-                <button  accepttype="button" class="btn btn-success" style="float: right;">Accept</button>
+                <button (click)="reject(user.username, user.team)" type="button" class="btn btn-danger" style="float: right;">Delete</button>
+                <button (click)="approve(user.username, user.team)" accepttype="button" class="btn btn-success" style="float: right;">Accept</button>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
+    <br>
+    <h6 class="info">This list represents all the users who have made an application to your team. They won't be a part of your team unless you accept them. Right now they are on a waiting list untill you approve/decline them.</h6>
+    </div>
+

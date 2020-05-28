@@ -1,15 +1,18 @@
-h2.info {
-    text-align: center;
-  }
+.info{
+  text-align: center;
+}
 
   h4.approved{
     text-align: center;
 
   }
+
+  h5.approved{
+    text-align: center;
+  }
   
   td, th {
     border: 1px solid #dddddd;  
-    text-align: right;
     padding: 7px;
     text-align: left;
     font-size: 100%;
