@@ -6,20 +6,13 @@ h2.info {
     text-align: center;
 
   }
-
-  table {
-    margin: 0 auto; 
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 80%;
-  }
   
   td, th {
-    border: 1px solid #dddddd;
+    border: 1px solid #dddddd;  
+    text-align: right;
+    padding: 7px;
     text-align: left;
-    padding: 8px;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #dddddd;
-  }
+    font-size: 100%;
+    
+    
+    }
