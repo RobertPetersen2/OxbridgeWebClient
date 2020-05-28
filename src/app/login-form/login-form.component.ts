@@ -5,6 +5,7 @@ import { first } from 'rxjs/operators';
 
 import { AuthenticationService } from '../service/authentication.service';
 import { AlertService } from '../service/alert.service';
+import { EnrollmentService } from '../service/enrollment.service';
 
 @Component({
     selector: 'app-login-form',
@@ -22,7 +23,8 @@ export class LoginFormComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthenticationService,
-        private alertService: AlertService
+        private alertService: AlertService,
+        private enrollmentService:EnrollmentService
     ) {
         // redirect to home if already logged in
         if (this.authenticationService.currentUserValue) { 
@@ -58,6 +60,10 @@ export class LoginFormComponent implements OnInit {
             .subscribe(
                 data => {
                     this.alertService.success('Login successful', true);
+
+                    // Reload enrollment status for new user, so that we don't display enrollment status for previous user
+                    this.enrollmentService.getStatus();
+
                     this.router.navigate([this.returnUrl]);
                 },
                 error => {
