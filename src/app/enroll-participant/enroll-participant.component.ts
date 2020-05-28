@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Team } from '../models/team';
 import { EnrollmentStatus } from './enrollment-status.enum';
+import { EnrollmentService } from '../service/enrollment.service';
 
 
 @Component({
@@ -25,13 +26,16 @@ export class EnrollParticipantComponent implements OnInit {
 
 
 
-  constructor() { 
+  constructor(private enrollmentService:EnrollmentService) { 
     this.selectedTeam = "No team selected";
     this.yourTeam = "Test Team";
+    this.userEnrollmentStatus = EnrollmentStatus.Undefined; //<--- Right here it should retrieve information from the server
 
-    this.userEnrollmentStatus = EnrollmentStatus.NoTeam; //<--- Right here it should retrieve information from the server
-
-
+    const currentEnrollmentStatus = this.enrollmentService.getStatus();
+    currentEnrollmentStatus.subscribe((enrollmentEnum: EnrollmentStatus) => {
+        this.userEnrollmentStatus = enrollmentEnum;
+    });
+    
   }
 
 
