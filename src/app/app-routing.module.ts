@@ -8,6 +8,8 @@ import { TeamMemberPendingApprovalsComponent } from './team-member-pending-appro
 import { EnrollParticipantComponent } from './enroll-participant/enroll-participant.component';
 import { RaceEditorComponent } from './race-editor/race-editor.component';
 import { RacesComponent } from './races/races.component';
+import { AuthGuard } from './auth/auth.guard';
+import { RoleGuard } from './auth/role.guard';
 
 const routes: Routes = [      //Roters is then you click under the menu bar button , its connected to "page"
   
@@ -15,9 +17,9 @@ const routes: Routes = [      //Roters is then you click under the menu bar butt
   { path: '',   redirectTo: '/home', pathMatch: 'full' },
   { path: 'login-form',        component: LoginFormComponent },
   { path: 'register-form',        component: RegisterFormComponent },
-  { path: 'team-list',        component: TeamListComponent  },
-  { path: 'enroll-participant',        component: EnrollParticipantComponent  },
-  { path: 'team-member-pending-approvals',        component: TeamMemberPendingApprovalsComponent  },
+  { path: 'team-list',        component: TeamListComponent, canActivate: [AuthGuard]  },
+  { path: 'enroll-participant',        component: EnrollParticipantComponent, canActivate: [RoleGuard], data: { expectedRole: 'isAdmin'}   },
+  { path: 'team-member-pending-approvals',        component: TeamMemberPendingApprovalsComponent, canActivate: [RoleGuard], data: { expectedRole: 'isTeamLeader'}  },
   { path: 'races', component: RacesComponent },
   { path: 'race-editor', component: RaceEditorComponent }
 

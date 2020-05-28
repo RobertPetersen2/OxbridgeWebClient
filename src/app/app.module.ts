@@ -10,6 +10,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './stuff/jwt.interceptor';
+import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 
 
 
@@ -58,7 +59,9 @@ import { AlertComponent } from './alert/alert.component';
 
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+        JwtHelperService
   ],
   bootstrap: [AppComponent],
 

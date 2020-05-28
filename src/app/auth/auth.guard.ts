@@ -1,15 +1,27 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
-@Injectable({
-  providedIn: 'root'
-})
+import { AuthenticationService } from '../service/authentication.service';
+import { AlertService } from '../service/alert.service';
+
+@Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
-  }
-  
+    constructor(
+        private router: Router,
+        private authenticationService: AuthenticationService,
+        private alertService: AlertService
+    ) {}
+
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        const currentUser = this.authenticationService.currentUserValue;
+        if (currentUser) {
+            // authorised so return true
+            return true;
+        }
+
+        // not logged in so redirect to login page with the return url
+        this.alertService.error('You have to be logged in to view this page ' + "'" + state.url + "'", true);
+        this.router.navigate(['/login-form'], { queryParams: { returnUrl: state.url }});
+        return false;
+    }
 }
