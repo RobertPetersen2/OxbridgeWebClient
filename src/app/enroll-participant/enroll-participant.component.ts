@@ -53,7 +53,12 @@ export class EnrollParticipantComponent implements OnInit {
         window.location.reload();
       }
     );
-
+    
+    enrollmentService.getYourTeam().subscribe(
+      (teamNameData:string) => {
+        this.yourTeam = teamNameData;
+      }
+    )
 
   }
 
@@ -82,6 +87,11 @@ export class EnrollParticipantComponent implements OnInit {
 
   click(team: string): void {
     this.selectedTeam = team;
+  }
+
+  leaveTeam(){
+    let currentUser = this.authenticationService.currentUserValue;
+    this.enrollmentService.leaveTeam(currentUser.username);
   }
 
 }
