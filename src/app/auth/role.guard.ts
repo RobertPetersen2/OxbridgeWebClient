@@ -16,14 +16,29 @@ export class RoleGuard implements CanActivate {
     // on the data property
     const expectedRole = route.data.expectedRole;
     let currentUser = this.authenticationService.currentUserValue;
-    // const token = localStorage.getItem('currentUser');
+    // Gets the token from our auth service
     const token = currentUser.token
     // decode the token to get its payload
     const tokenPayload = decode(token);
+    // Since we use true or false and not define a role to grand access
+    // we will fetch the value (true or false) that is in isAdmin or isTeamLeader and later compare it if it's true or false
     const fetchedRole = tokenPayload[expectedRole];
-
-    console.log(fetchedRole);
     
+
+    //####################################################//
+    // ADMIN OVERRIDE as long as the user is an ADMIN he will be able to access 
+    // all pages that are restricted with a role lower than admin!
+    //####################################################//
+    if (
+      this.authenticationService.isAuthenticated() &&
+      tokenPayload.isAdmin === true
+    ) {
+      return true;
+    }
+    //####################################################//
+
+
+    // Normal Role handler
     if (
       !this.authenticationService.isAuthenticated() || 
       fetchedRole !== true
@@ -32,6 +47,8 @@ export class RoleGuard implements CanActivate {
       this.router.navigate(['/'], { queryParams: { returnUrl: state.url }});
       return false;
     }
+
+    // Else grand access
     return true;
   }
 
