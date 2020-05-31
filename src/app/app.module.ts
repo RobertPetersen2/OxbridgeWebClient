@@ -26,6 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RacesComponent } from './races/races.component';
 import { RaceEditorComponent } from './race-editor/race-editor.component';
 import { AlertComponent } from './alert/alert.component';
+import { RaceTeamsManagementComponent } from './race-teams-management/race-teams-management.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { AlertComponent } from './alert/alert.component';
     EnrollParticipantComponent,
     RacesComponent,
     RaceEditorComponent,
-    AlertComponent
+    AlertComponent,
+    RaceTeamsManagementComponent
 
   ],
   imports: [

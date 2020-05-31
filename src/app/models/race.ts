@@ -1,4 +1,5 @@
 import { CheckPoint } from './check-point';
+import { Team } from './team';
 
 export class Race {
     public raceID: number;
@@ -6,4 +7,5 @@ export class Race {
     public startTime:Date;
     public locationDescription:string;
     public laps: number;
+    public teams: Team[];
 }
