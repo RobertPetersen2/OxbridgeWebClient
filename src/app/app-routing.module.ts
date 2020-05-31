@@ -10,6 +10,7 @@ import { RaceEditorComponent } from './race-editor/race-editor.component';
 import { RacesComponent } from './races/races.component';
 import { AuthGuard } from './auth/auth.guard';
 import { RoleGuard } from './auth/role.guard';
+import { RaceTeamsManagementComponent } from './race-teams-management/race-teams-management.component';
 
 const routes: Routes = [      //Roters is then you click under the menu bar button , its connected to "page"
   
@@ -21,7 +22,8 @@ const routes: Routes = [      //Roters is then you click under the menu bar butt
   { path: 'enroll-participant',        component: EnrollParticipantComponent, canActivate: [AuthGuard]  },
   { path: 'team-member-pending-approvals',        component: TeamMemberPendingApprovalsComponent, canActivate: [RoleGuard], data: { expectedRole: 'isTeamLeader'}  },
   { path: 'races', component: RacesComponent },
-  { path: 'race-editor', component: RaceEditorComponent }
+  { path: 'race-editor', component: RaceEditorComponent },
+  { path: 'race-teams-management', component: RaceTeamsManagementComponent }
 
 ];
 

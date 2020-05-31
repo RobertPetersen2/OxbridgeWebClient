@@ -167,7 +167,7 @@ export class RaceEditorComponent implements OnInit {
   submit() {
 
 
-    if(this.raceEditForm.invalid || this.raceEditForm.untouched){
+    if(this.raceEditForm.invalid){
       console.log("Invalid input");
       return;
     }

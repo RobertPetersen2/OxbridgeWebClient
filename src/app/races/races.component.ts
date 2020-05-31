@@ -56,7 +56,8 @@ export class RacesComponent implements OnInit {
       locationDescription: this.locationDescription, 
       startTime: this.startTime, 
       laps:1, 
-      checkPoints: []
+      checkPoints: [],
+      teams: []
     };
 
     // if(this.raceEditForm.invalid || this.raceEditForm.untouched){

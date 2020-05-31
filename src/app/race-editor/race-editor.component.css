@@ -52,9 +52,20 @@ label{
 }
 
 .saveBtn{
+    
     height: 50px;
     margin-left: 20px;
     background-color: rgb(135, 191, 224);
+    border-radius: 5px;
+    border-color: transparent;
+    color: white;
+    border-width: 1px;
+}
+
+.teamBtn{
+    height: 50px;
+    margin-bottom: 10px;
+    background-color: rgb(65, 170, 96);
     border-radius: 5px;
     border-color: transparent;
     color: white;

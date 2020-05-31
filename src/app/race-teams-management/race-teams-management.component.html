@@ -1,0 +1,45 @@
+<br>
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2 class="info" style="float:left;"><b> Teams attending this race(RaceID:3) </b></h2>
+        </div>
+        <div class="col" >
+            <div ngbDropdown class="btn-group" style="float: right;">
+                <button class="btn btn-outline-primary" id="dropdownMenu1" ngbDropdownToggle>Available Races</button>
+                <ul class="dropdown-menu">
+                    <button class="dropdown-item" *ngFor="let team of availableTeams" 
+                    (click)=click(team.teamName)>{{team.teamName}}</button>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="mat-elevation-z8" style="border:1px solid black; height: 400px;">
+            <table mdbTable mdbTableScroll scrollY="true" scrollX="false" maxHeight=600>
+                <thead class="indigo darken-3 white-text ">
+                    <tr>
+                        <th>Teams</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row"> Bois from da hood</th>
+                        <td>
+                            <button type="button" class="btn btn-danger" style="float: right; ">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"> The Sønderborg team</th>
+                        <td>
+                            <button type="button" class="btn btn-danger" style="float: right; ">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
