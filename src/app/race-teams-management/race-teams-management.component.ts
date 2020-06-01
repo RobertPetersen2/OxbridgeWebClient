@@ -16,10 +16,10 @@ export class RaceTeamsManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this.availableTeams = [
-      {teamName:"Lort"},
-      {teamName:"Endnu mere lort"},
-      {teamName:"Kartoffel"},
-      {teamName:"Røvbanan"}
+      // {teamName:"Lort"},
+      // {teamName:"Endnu mere lort"},
+      // {teamName:"Kartoffel"},
+      // {teamName:"Røvbanan"}
     ]
   }
 

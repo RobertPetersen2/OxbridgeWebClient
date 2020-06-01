@@ -12,11 +12,11 @@
               <th>Modify <b>(Admin part)</b></th>
             </tr>
           </thead>
-          <tbody *ngFor="let team of teams"> 
+          <tbody *ngFor="let team of teamList"> 
             <tr>
               <th scope="row"> {{team.teamName}}</th> <!-- Adding a team in the row.-->
               <td>
-                <button type="button" class="btn btn-warning" >Edit</button>
+                <button type="button" class="btn btn-warning" (click)="editTeam(team)">Edit</button>
                 <button type="button" class="btn btn-danger" >Delete</button>
               </td>
             </tr>
@@ -35,11 +35,11 @@
               <th>Modify <b>(Leader part)</b></th>
             </tr>
           </thead>
-          <tbody> 
+          <tbody *ngFor="let users of teamMembers"> 
             <tr>
-              <th scope="row"> Team Sønderborg</th>
+              <th scope="row"> {{users.username}} </th>
               <td>
-                <button type="button" class="btn btn-danger" >Delete</button>
+                <button type="button" class="btn btn-danger" (click)="deleteUser(users)" >Delete</button>
               </td>
             </tr>
           </tbody>

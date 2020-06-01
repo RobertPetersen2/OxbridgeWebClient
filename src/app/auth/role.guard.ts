@@ -24,6 +24,8 @@ export class RoleGuard implements CanActivate {
     // we will fetch the value (true or false) that is in isAdmin or isTeamLeader and later compare it if it's true or false
     const fetchedRole = tokenPayload[expectedRole];
     
+    // console.log(tokenPayload.isTeamLeader)
+    console.log(expectedRole)
 
     //####################################################//
     // ADMIN OVERRIDE as long as the user is an ADMIN he will be able to access 
