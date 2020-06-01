@@ -50,6 +50,8 @@ export class TeamListComponent implements OnInit {
   }
   
 
+  
+
 
 
   // deleteTeam(team:Team):any{
