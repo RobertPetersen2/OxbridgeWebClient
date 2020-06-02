@@ -12,7 +12,7 @@ export class TeamListService {
    teams: Team[] = [];
 
   constructor(private http:HttpClient) { 
-    this.teams.push(new Team("Team in teamlist.service!"));
+  //  this.teams.push(new Team("Team in teamlist.service!"));
   }
 
   public getTeamList(): Observable<Team[]> { //
