@@ -4,6 +4,7 @@ import { TeamListService} from '../service/team-list.service';
 import { AuthenticationService } from '../service/authentication.service';
 import { TEMPORARY_NAME } from '@angular/compiler/src/render3/view/util';
 import { first } from 'rxjs/operators';
+import { TeamMember } from '../models/team-member';
 
 
 
@@ -15,7 +16,7 @@ import { first } from 'rxjs/operators';
 export class TeamListComponent implements OnInit {
   
   public teamList: Team[] = [];
-  public teamMembers: string;
+  public teamMembers: TeamMember[];
   public currentlyEditing: string;
 
   constructor(
@@ -54,20 +55,21 @@ export class TeamListComponent implements OnInit {
     this.currentlyEditing = team.teamName
   }
 
-  deleteUser(users: string){
-    console.log("You are trying to delete user from team: " + this.currentlyEditing + users);
-    this.teamListService.deleteUserFromTeam(this.currentlyEditing, users)
-    .pipe(first())
-    .subscribe(
-      data => {
-        console.log(data);
-
-    },
-    error => {
-        console.log(error);
-    });
+  deleteUser(user: string){
+    console.log("You are trying to delete user from team: " + this.currentlyEditing + user);
+    // We delete the user from the team, which should automatically update the teamlist that we are subscribing to
+    // So no further action should be required
+    this.teamListService.deleteUserFromTeam(this.currentlyEditing, user);
+    // If you are deleting yourself, you should be logged out
+    if(user == this.authenticationService.currentUserValue.username){
+      this.authenticationService.logout();
+    }
+    
   }
   
+  deleteTeam(teamName:string){
+    this.teamListService.deleteTeam(teamName);
+  }
 
   ngOnInit(): void {
   //   const reservationsObservable = this.teamListAdmin.getTeamList();
