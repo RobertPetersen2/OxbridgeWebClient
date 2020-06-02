@@ -18,7 +18,7 @@ const routes: Routes = [      //Roters is then you click under the menu bar butt
   { path: '',   redirectTo: '/home', pathMatch: 'full' },
   { path: 'login-form',        component: LoginFormComponent },
   { path: 'register-form',        component: RegisterFormComponent },
-  { path: 'team-list',        component: TeamListComponent, canActivate: [RoleGuard], data: { expectedRole: 'isTeamleader'}  },
+  { path: 'team-list',        component: TeamListComponent, canActivate: [RoleGuard], data: { expectedRole: 'isTeamLeader'}  },
   { path: 'enroll-participant',        component: EnrollParticipantComponent, canActivate: [AuthGuard]  },
   { path: 'team-member-pending-approvals',        component: TeamMemberPendingApprovalsComponent, canActivate: [RoleGuard], data: { expectedRole: 'isTeamLeader'}  },
   { path: 'races', component: RacesComponent },

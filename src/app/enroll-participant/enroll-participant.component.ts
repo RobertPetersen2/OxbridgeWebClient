@@ -68,9 +68,9 @@ export class EnrollParticipantComponent implements OnInit {
 
 
   teams: Team[] = [
-    { teamName: 'HardCodedTeam1' },
-    { teamName: 'HardCodedTeam2' },
-    { teamName: 'HardCodedTeam3' }
+    // { teamName: 'HardCodedTeam1' },
+    // { teamName: 'HardCodedTeam2' },
+    // { teamName: 'HardCodedTeam3' }
   ];
 
 

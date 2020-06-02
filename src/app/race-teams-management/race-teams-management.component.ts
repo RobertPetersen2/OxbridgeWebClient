@@ -58,8 +58,6 @@ export class RaceTeamsManagementComponent implements OnInit {
     //   {teamName:"Kartoffel"},
     //   {teamName:"Røvbanan"}
     // ];
-
-    
   }
 
   click(team: string): void {
