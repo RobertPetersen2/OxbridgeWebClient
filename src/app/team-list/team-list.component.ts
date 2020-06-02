@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Team } from '../models/team';
 import { TeamListService} from '../service/team-list.service';
 import { AuthenticationService } from '../service/authentication.service';
+import { TEMPORARY_NAME } from '@angular/compiler/src/render3/view/util';
+import { first } from 'rxjs/operators';
 
 
 @Component({
@@ -13,34 +15,58 @@ export class TeamListComponent implements OnInit {
   
   public teamList: Team[] = [];
   public teamMembers: string;
+  public currentlyEditing: string;
 
   constructor(
     private teamListService : TeamListService,
     private authenticationService: AuthenticationService
     ) { 
 
-    // Get a list of all teams as Admin
-    const adminTeamList = this.teamListService.getTeamList();
-    adminTeamList.subscribe((adminTeamListData: Team[]) => {
-      this.teamList = adminTeamListData;
-    });
+    let currentUser = this.authenticationService.currentUserValue;
 
+    // Get a list of all teams
+
+    // Working part for admin
+    if(currentUser.isAdmin === true){
+      const teamList = this.teamListService.getTeamList();
+      teamList.subscribe((teamListData: Team[]) => {
+      this.teamList = teamListData;
+    });
+    }
+
+    // Teamleader has to be fixed
+    if(currentUser.isTeamLeader === true){
+      const teamList = this.teamListService.getTeamList();
+      teamList.subscribe((teamListData: Team[]) => {
+      this.teamList = teamListData;
+    });
+    }
 
   }
 
+  
   editTeam(team:Team):any{
     const index: number = this.teamList.indexOf(team);
     console.log("Editing team: " + team.teamName);
     this.teamMembers = team.users;
     console.log(this.teamMembers);
+    this.currentlyEditing = team.teamName
   }
 
-  deleteUser(team:Team):any{
-    const index: number = this.teamList.indexOf(team);
-    console.log("You are trying to delete user: " + team.users);
+  deleteUser(users: string){
+    console.log("You are trying to delete user from team: " + this.currentlyEditing + users);
+    this.teamListService.deleteUserFromTeam(this.currentlyEditing, users)
+    .pipe(first())
+    .subscribe(
+      data => {
+        console.log(data);
+
+    },
+    error => {
+        console.log(error);
+    });
   }
   
-
 
   ngOnInit(): void {
   //   const reservationsObservable = this.teamListAdmin.getTeamList();
