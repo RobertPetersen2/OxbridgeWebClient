@@ -4,6 +4,7 @@ import { TeamListService} from '../service/team-list.service';
 import { AuthenticationService } from '../service/authentication.service';
 
 
+
 @Component({
   selector: 'app-team-list',
   templateUrl: './team-list.component.html',
