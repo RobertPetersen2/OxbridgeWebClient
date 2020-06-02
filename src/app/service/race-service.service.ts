@@ -1,24 +1,28 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Race } from '../models/race';
 import { CheckPoint } from '../models/check-point';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { Team } from '../models/team';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RaceServiceService {
 
+  public dataHasChanged = new EventEmitter<string>();
 
-  private currentRaceID: BehaviorSubject<number>;
+  private availableTeamsForRaceID: BehaviorSubject<Team[]>
 
+  private currentRaceID: BehaviorSubject<number>;  
   private allRaces: BehaviorSubject<Race[]>;
 
   testDate: Date;
   constructor(private http: HttpClient) {
     this.currentRaceID= new BehaviorSubject<number>(-1);
     this.allRaces = new BehaviorSubject<Race[]>([]);
+    this.availableTeamsForRaceID = new BehaviorSubject<Team[]>([]);
     // Test date (ignore)
     this.testDate = new Date("2020-07-16");
     this.testDate.setHours(10);
@@ -39,8 +43,8 @@ export class RaceServiceService {
   }
 
   public getSpecificRace(raceID: number): Observable<Race> {
-    // Should just be currentRaceSelected
-    return this.http.get<Race>('http://148.251.122.228:3000/races/' + raceID);
+
+      return this.http.get<Race>('http://148.251.122.228:3000/races/' + raceID); 
   }
 
   public postRace(race: Race): void {
@@ -117,6 +121,48 @@ export class RaceServiceService {
       return -1;
     }
   }
+
+  getAvailableTeamsByRaceId(raceID:number) : Observable<Team[]> {
+    // Load the teams from the DB <--- TODO make it only show available teams, and not all teams
+    const teamsObj = this.http.get<Team[]>('http://148.251.122.228:3000/teams/');
+    // If this method is called again we update the observable
+    teamsObj.subscribe((response: Team[]) => {
+      this.availableTeamsForRaceID.next(response)
+    });
+    return this.availableTeamsForRaceID;
+  }
+
+  assignTeamByRaceId(raceID:number, teamName:string): void{
+    const response = this.http.post<any>('http://148.251.122.228:3000/races/assignTeam',{raceID, teamName});
+    response.subscribe(
+      data => {
+        let obj = JSON.parse(JSON.stringify(data));
+        if(obj.hasOwnProperty('action')){
+          if(obj.action == "success"){
+            this.dataHasChanged.emit("The team was assigned to the race without errors");
+          }
+        }
+       },
+      error => console.log("ERROR MESSAGE:" + JSON.stringify(error))
+    );
+  }
+
+  removeTeamFromRace(raceID:number, teamName:string): void{
+    const response = this.http.post<any>('http://148.251.122.228:3000/races/removeTeam/' + raceID,{teamName});
+    response.subscribe(
+      data => {
+        let obj = JSON.parse(JSON.stringify(data));
+        if(obj.hasOwnProperty('action')){
+          if(obj.action == "success"){
+            this.dataHasChanged.emit("The team was un-assigned from the race without errors");
+          }
+        }
+       },
+      error => console.log("ERROR MESSAGE:" + JSON.stringify(error))
+    );
+  }
+
+
 
 
 }

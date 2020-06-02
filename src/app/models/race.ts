@@ -7,5 +7,5 @@ export class Race {
     public startTime:Date;
     public locationDescription:string;
     public laps: number;
-    public teams: Team[];
+    public assignedTeams: Team[];
 }

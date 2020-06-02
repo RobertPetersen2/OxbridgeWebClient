@@ -4,38 +4,35 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <h2 class="info" style="float:left;"><b> Teams attending this race(RaceID:3) </b></h2>
+            <h2 class="info" style="float:left;"><b> Teams attending this race: (RaceID: {{currentRace.raceID}}) </b></h2>
         </div>
-        <div class="col" >
+        <div class="col-5" >
             <div ngbDropdown class="btn-group" style="float: right;">
-                <button class="btn btn-outline-primary" id="dropdownMenu1" ngbDropdownToggle>Available Races</button>
+                <button class="btn btn-outline-primary" id="dropdownMenu1" ngbDropdownToggle>Click here to add a team</button>
                 <ul class="dropdown-menu">
                     <button class="dropdown-item" *ngFor="let team of availableTeams" 
-                    (click)=click(team.teamName)>{{team.teamName}}</button>
+                    (click)="assignTeam(currentRace.raceID, team.teamName)">{{team.teamName}}</button>
                 </ul>
             </div>
         </div>
     </div>
     <div>
-        <div class="mat-elevation-z8" style="border:1px solid black; height: 400px;">
-            <table mdbTable mdbTableScroll scrollY="true" scrollX="false" maxHeight=600>
+        <div class="mat-elevation-z8" style="border:1px solid black; height: 500px;">
+            <table mdbTable mdbTableScroll scrollY="true" scrollX="false" maxHeight=500>
                 <thead class="indigo darken-3 white-text ">
                     <tr>
                         <th>Teams</th>
                         <th></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row"> Bois from da hood</th>
+                <tbody *ngIf="teamsAttending?.length == 0">
+                    <h5>No teams attending this race</h5>
+                </tbody>
+                <tbody *ngFor="let team of teamsAttending">
+                    <tr *ngIf="teamsAttending?.length > 0 && team.teamName;">
+                        <th scope="row">{{team.teamName}}</th>
                         <td>
-                            <button type="button" class="btn btn-danger" style="float: right; ">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row"> The Sønderborg team</th>
-                        <td>
-                            <button type="button" class="btn btn-danger" style="float: right; ">Delete</button>
+                            <button (click)="removeTeam(currentRace.raceID, team.teamName)" type="button" class="btn btn-danger" style="float: right; ">Delete</button>
                         </td>
                     </tr>
                 </tbody>

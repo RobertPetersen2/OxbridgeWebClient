@@ -1,3 +1,5 @@
 export class Team {
-    constructor(public teamName: string, public users: string){}
+    public teamName: string;
+    public users: string
+    constructor(){ }
 }

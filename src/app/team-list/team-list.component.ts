@@ -6,6 +6,7 @@ import { TEMPORARY_NAME } from '@angular/compiler/src/render3/view/util';
 import { first } from 'rxjs/operators';
 
 
+
 @Component({
   selector: 'app-team-list',
   templateUrl: './team-list.component.html',
@@ -73,6 +74,7 @@ export class TeamListComponent implements OnInit {
   //   reservationsObservable.subscribe((locationData: Team[]) => {
   //     this.teams = locationData;
   // })
+
   }
   
 
