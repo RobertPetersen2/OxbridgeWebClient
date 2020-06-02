@@ -14,7 +14,11 @@ export class TeamListService {
 
 
   constructor(private http:HttpClient) { 
+
+  //  this.teams.push(new Team("Team in teamlist.service!"));
+
     this.teamList = new BehaviorSubject<Team[]>([]);
+
   }
 
 

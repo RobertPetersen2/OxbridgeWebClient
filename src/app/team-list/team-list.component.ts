@@ -29,10 +29,19 @@ export class TeamListComponent implements OnInit {
   }
 
   editTeam(team:Team):any{
-    const index: number = this.teamList.indexOf(team);
-    console.log("Editing team: " + team.teamName);
-    this.teamMembers = team.users;
-    console.log(this.teamMembers);
+    const index: number = this.teams.indexOf(team);
+    const editedValue: Team = {teamName: 'THE  NEW TEAM 2 '};
+    if(index !== -1){
+      this.teams.fill(editedValue, index, index +1 );
+      console.log("Edited location with message: " + team.teamName);
+      return true;
+    }
+    return false;
+
+//    const index: number = this.teamList.indexOf(team);
+//    console.log("Editing team: " + team.teamName);
+//    this.teamMembers = team.users;
+//    console.log(this.teamMembers);
   }
 
   deleteUser(team:Team):any{
@@ -47,6 +56,7 @@ export class TeamListComponent implements OnInit {
   //   reservationsObservable.subscribe((locationData: Team[]) => {
   //     this.teams = locationData;
   // })
+
   }
   
 
