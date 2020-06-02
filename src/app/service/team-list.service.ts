@@ -23,7 +23,7 @@ export class TeamListService {
 
 
   public getTeamList(): Observable<Team[]> {
-    // Load the races from the DB
+    // Load the Teams from the DB can both be used for Admin and Teamleader
     const teamObj = this.http.get<Team[]>('http://148.251.122.228:3000/teams/');
     // If this method is called again we update the observable
     teamObj.subscribe((response: Team[]) => {
@@ -31,6 +31,24 @@ export class TeamListService {
       this.teamList.next(response);
     });
     return this.teamList;
+  }
+
+  public deleteUserFromTeam(teamName:string, username:string){
+    const deleted = this.http.post<Team[]>('http://148.251.122.228:3000/teams/participant', {teamName, username});
+    deleted.subscribe(
+      data => {
+      let obj = JSON.parse(JSON.stringify(data));
+      console.log(obj);
+      if(obj.action == 'success'){
+        console.log("Removing of user from team was a success");
+        let teamListLocal: Team[] = this.teamList.getValue();
+      }
+    },
+    error => {
+      console.log("Error Message:" + error)
+    }
+    )
+    return deleted;
   }
 
 }
