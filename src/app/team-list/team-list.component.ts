@@ -4,6 +4,7 @@ import { TeamListService} from '../service/team-list.service';
 import { AuthenticationService } from '../service/authentication.service';
 
 
+
 @Component({
   selector: 'app-team-list',
   templateUrl: './team-list.component.html',
@@ -29,10 +30,10 @@ export class TeamListComponent implements OnInit {
   }
 
   editTeam(team:Team):any{
-    const index: number = this.teams.indexOf(team);
-    const editedValue: Team = {teamName: 'THE  NEW TEAM 2 '};
+    const index: number = this.teamList.indexOf(team);
+    const editedValue: Team = {teamName: 'THE  NEW TEAM 2 ', users:''};
     if(index !== -1){
-      this.teams.fill(editedValue, index, index +1 );
+      this.teamList.fill(editedValue, index, index +1 );
       console.log("Edited location with message: " + team.teamName);
       return true;
     }
