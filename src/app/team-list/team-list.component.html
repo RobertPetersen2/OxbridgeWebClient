@@ -4,8 +4,8 @@
 <div class="container">
   <div class="row">
     <div class="col" >
-      <div class="mat-elevation-z8" style="border:1px solid black; height: 200px; ">
-        <table mdbTable mdbTableScroll scrollY="true" scrollX="false" maxHeight=400   >
+      <div class="mat-elevation-z8" style="border:1px solid black; height: 500px; ">
+        <table mdbTable mdbTableScroll scrollY="true" scrollX="false" maxHeight=500   >
           <thead class="indigo darken-3 white-text   ">
             <tr>
             <th>Team name</th>
@@ -17,7 +17,7 @@
               <th scope="row"> {{team.teamName}}</th> <!-- Adding a team in the row.-->
               <td>
                 <button type="button" class="btn btn-warning" (click)="editTeam(team)">Edit</button>
-                <button type="button" class="btn btn-danger" >Delete</button>
+                <button type="button" class="btn btn-danger" (click)="deleteTeam(team.teamName)">Delete</button>
               </td>
             </tr>
           </tbody>
@@ -31,19 +31,19 @@
 
     <!-- OTher table to the right !-->
     <div class="col">
-      <div class="mat-elevation-z8" style="border:1px solid black; height: 200px; ">
-        <table mdbTable mdbTableScroll scrollY="true" scrollX="false" maxHeight=400>
+      <div class="mat-elevation-z8" style="border:1px solid black; height: 500px; ">
+        <table mdbTable mdbTableScroll scrollY="true" scrollX="false" maxHeight=500>
           <thead class="indigo darken-3 white-text   table-layout: auto; ">
             <tr>
               <th>Team name</th>
               <th>Modify <b>(Leader part)</b></th>
             </tr>
           </thead>
-          <tbody *ngFor="let users of teamMembers"> 
+          <tbody *ngFor="let user of teamMembers"> 
             <tr>
-              <th scope="row"> {{users.username}} </th>
+              <th scope="row"> {{user.username}} </th>
               <td>
-                <button type="button" class="btn btn-danger" (click)="deleteUser(users.username)" >Delete</button>
+                <button type="button" class="btn btn-danger" (click)="deleteUser(user.username)" >Delete</button>
               </td>
             </tr>
           </tbody>
