@@ -12,6 +12,8 @@ export class TeamListService {
 
 
   private teamList: BehaviorSubject<Team[]>;
+  private teamNameTL: string;
+  private teamMembers: BehaviorSubject<TeamMember[]>;
 
 
   constructor(private http:HttpClient) { 
@@ -33,6 +35,26 @@ export class TeamListService {
     });
     return this.teamList;
   }
+
+  // TL Part
+  public getTeamMember(): Observable<Team[]> {
+    const teamList = this.http.get<Team[]>('http://148.251.122.228:3000/teams/');
+    teamList.subscribe((response: Team[]) => {
+      console.log(response);
+      this.teamList.next(response);
+
+      let teamObj = JSON.parse(JSON.stringify(response));
+      console.log(teamObj.teamName)
+      console.log(teamObj.users)
+
+      console.log("whats inside teamList now")
+      console.log(this.teamList)
+
+    });
+    return;
+  }
+  
+
 
   public deleteUserFromTeam(teamName:string, username:string): void {
     const deleted = this.http.post<Team[]>('http://148.251.122.228:3000/teams/participant', {teamName, username});

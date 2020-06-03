@@ -3,7 +3,7 @@
 <br>
 <div class="container">
   <div class="row">
-    <div class="col" >
+    <div class="col" *ngIf="currentUser?.isAdmin == true" >
       <div class="mat-elevation-z8" style="border:1px solid black; height: 500px; ">
         <table mdbTable mdbTableScroll scrollY="true" scrollX="false" maxHeight=500   >
           <thead class="indigo darken-3 white-text   ">

@@ -5,6 +5,7 @@ import { AuthenticationService } from '../service/authentication.service';
 import { TEMPORARY_NAME } from '@angular/compiler/src/render3/view/util';
 import { first } from 'rxjs/operators';
 import { TeamMember } from '../models/team-member';
+import { User } from '../models/user';
 
 
 
@@ -18,16 +19,17 @@ export class TeamListComponent implements OnInit {
   public teamList: Team[] = [];
   public teamMembers: TeamMember[];
   public currentlyEditing: string;
+  currentUser: User;
 
   constructor(
     private teamListService : TeamListService,
     private authenticationService: AuthenticationService
     ) { 
 
-    let currentUser = this.authenticationService.currentUserValue;
-
+    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     // Get a list of all teams
 
+    let currentUser = this.authenticationService.currentUserValue;
     // Working part for admin
     if(currentUser.isAdmin === true){
       const teamList = this.teamListService.getTeamList();
@@ -36,13 +38,25 @@ export class TeamListComponent implements OnInit {
     });
     }
 
-    // Teamleader has to be fixed
     if(currentUser.isTeamLeader === true){
-      const teamList = this.teamListService.getTeamList();
-      teamList.subscribe((teamListData: Team[]) => {
-      this.teamList = teamListData;
-    });
+      const teamMembers = this.teamListService.getTeamMember();
+      // teamMembers.subscribe((teamMembersData: TeamMember[]) => {
+      // this.teamMembers = teamMembersData;
+      // });
+    
     }
+
+    // Teamleader has to be fixed
+    // if(currentUser.isTeamLeader === true){
+    //   const teamList = this.teamListService.getTeamList();
+    //   teamList.subscribe((teamListData: Team[]) => {
+    //   this.teamList = teamListData;
+    // });
+    // }
+    
+    
+    
+
 
   }
 
