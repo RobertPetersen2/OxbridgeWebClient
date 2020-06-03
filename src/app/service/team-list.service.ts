@@ -36,6 +36,7 @@ export class TeamListService {
     return this.teamList;
   }
 
+
   // TL Part
   public getTeamMember(): Observable<Team[]> {
     const teamList = this.http.get<Team[]>('http://148.251.122.228:3000/teams/');
@@ -44,8 +45,12 @@ export class TeamListService {
       this.teamList.next(response);
 
       let teamObj = JSON.parse(JSON.stringify(response));
-      console.log(teamObj.teamName)
-      console.log(teamObj.users)
+      // console.log(teamObj.teamName)
+      // console.log(teamObj.users)
+
+      this.teamNameTL = teamObj.teamName;
+      let usersArray: TeamMember[] = teamObj.users;
+      console.log(usersArray)
 
       console.log("whats inside teamList now")
       console.log(this.teamList)
