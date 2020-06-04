@@ -57,13 +57,13 @@ export class RacesComponent implements OnInit {
       startTime: this.startTime, 
       laps:1, 
       checkPoints: [],
-      assignedTeams: []
+      assignedTeams: [],
     };
 
-    // if(this.raceEditForm.invalid || this.raceEditForm.untouched){
-    //   console.log("Invalid input");
-    //   return;
-    // }
+    if(this.newRaceForm.invalid || this.newRaceForm.untouched){
+       console.log("Invalid input");
+       return;
+     }
 
     console.log("Submit was executed!");
     // Get all the data together and send it as a JSON to the server under the ID
