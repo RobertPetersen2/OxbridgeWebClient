@@ -39,10 +39,16 @@ export class TeamListComponent implements OnInit {
     }
 
     if(currentUser.isTeamLeader === true){
-      const teamMembers = this.teamListService.getTeamMember();
-      // teamMembers.subscribe((teamMembersData: TeamMember[]) => {
-      // this.teamMembers = teamMembersData;
-      // });
+      const teamList = this.teamListService.getTeamList();
+      teamList.subscribe((teamListData: Team[]) => {
+      this.teamList = teamListData;
+      let teamObj = JSON.parse(JSON.stringify(teamListData));
+      
+      let usersArray: TeamMember[] = teamObj.users;
+      this.teamMembers = usersArray
+      this.currentlyEditing = teamObj.teamName;
+      console.log(this.teamMembers)
+      });
     
     }
 
@@ -78,11 +84,21 @@ export class TeamListComponent implements OnInit {
     if(user == this.authenticationService.currentUserValue.username){
       this.authenticationService.logout();
     }
+    if(this.currentUser.isTeamLeader === true){
+    location.reload(true);
+    }
     
   }
   
   deleteTeam(teamName:string){
-    this.teamListService.deleteTeam(teamName);
+      this.teamListService.deleteTeam(teamName);
+  }
+
+  deleteTeamTL(){
+    if(this.currentUser.isTeamLeader === true){
+      let teamName = this.currentlyEditing;
+      this.teamListService.deleteTeam(teamName);
+    }
   }
 
   ngOnInit(): void {
