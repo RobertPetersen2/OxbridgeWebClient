@@ -4,6 +4,7 @@ import { Race } from '../models/race';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CheckPoint } from '../models/check-point';
 import { Router } from '@angular/router';
+import { ConfirmationDialogService } from '../service/confirmation-dialog/confirmation-dialog.service';
 
 @Component({
   selector: 'app-races',
@@ -24,7 +25,8 @@ export class RacesComponent implements OnInit {
   constructor(
     private raceService : RaceServiceService,
     private formBuilder: FormBuilder,
-    private router:Router) { 
+    private router:Router,
+    private confirmationDialogService: ConfirmationDialogService) { 
     const racesObservable = this.raceService.getRaces();
     racesObservable.subscribe((raceData: Race[]) => {
     this.allRaces = raceData;
@@ -72,6 +74,16 @@ export class RacesComponent implements OnInit {
     // Post it, and if it was a success it should automatically appear in the table
     this.raceService.postRace(newRace);
 
+  }
+
+  deleteRaceDialog(raceID:number) {
+    this.confirmationDialogService.confirm('Please confirm deletion of race', 'Do you really want to delete this race?',"Confirm","Cancel","lg")
+    .then((confirmed) => {
+      if(confirmed){
+        this.deleteRace(raceID);
+      }
+    })
+    .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   }
 
 

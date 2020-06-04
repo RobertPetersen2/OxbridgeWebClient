@@ -11,18 +11,24 @@ import { Team } from '../models/team';
 })
 export class RaceServiceService {
 
+  // Event
   public dataHasChanged = new EventEmitter<string>();
 
   private availableTeamsForRaceID: BehaviorSubject<Team[]>
+  private availableRacesForTeam: BehaviorSubject<Race[]>
 
   private currentRaceID: BehaviorSubject<number>;  
   private allRaces: BehaviorSubject<Race[]>;
+
+  private racesAssignedForSelectedTeam: BehaviorSubject<Race[]>
 
   testDate: Date;
   constructor(private http: HttpClient) {
     this.currentRaceID= new BehaviorSubject<number>(-1);
     this.allRaces = new BehaviorSubject<Race[]>([]);
     this.availableTeamsForRaceID = new BehaviorSubject<Team[]>([]);
+    this.availableRacesForTeam = new BehaviorSubject<Race[]>([]);
+    this.racesAssignedForSelectedTeam = new BehaviorSubject<Race[]>([]);
     // Test date (ignore)
     this.testDate = new Date("2020-07-16");
     this.testDate.setHours(10);
@@ -132,6 +138,27 @@ export class RaceServiceService {
     return this.availableTeamsForRaceID;
   }
 
+  getAvailableRacesByTeam(team:string) : Observable<Race[]> {
+        // Load the races from the DB 
+        const racesObj = this.http.get<Race[]>('http://148.251.122.228:3000/races/availableRaces');
+        // If this method is called again we update the observable
+        racesObj.subscribe((response: Race[]) => {
+          this.availableRacesForTeam.next(response)
+        });
+        return this.availableRacesForTeam;
+
+  }
+
+  getRacesAssignedToTeam() : Observable<Race[]> {
+    // Load the races of the token-holder (team leader)
+    const teamsObj = this.http.get<Race[]>('http://148.251.122.228:3000/races/assignedRaces');
+    // If this method is called again we update the observable
+    teamsObj.subscribe((response: Race[]) => {
+      this.racesAssignedForSelectedTeam.next(response);
+    });
+    return this.racesAssignedForSelectedTeam;
+  }
+
   assignTeamByRaceId(raceID:number, teamName:string): void{
     const response = this.http.post<any>('http://148.251.122.228:3000/races/assignTeam',{raceID, teamName});
     response.subscribe(
@@ -161,6 +188,8 @@ export class RaceServiceService {
       error => console.log("ERROR MESSAGE:" + JSON.stringify(error))
     );
   }
+
+  
 
 
 
