@@ -2,17 +2,18 @@
 <br>
 <br>
 <div class="container">
+  <h4>Team Management</h4>
   <div class="row">
-    <div class="col" *ngIf="currentUser?.isAdmin == true" >
+    <div class="col" *ngIf="currentUser?.isAdmin == true">
       <div class="mat-elevation-z8" style="border:1px solid black; height: 500px; ">
-        <table mdbTable mdbTableScroll scrollY="true" scrollX="false" maxHeight=500   >
+        <table mdbTable mdbTableScroll scrollY="true" scrollX="false" maxHeight=500>
           <thead class="indigo darken-3 white-text   ">
             <tr>
-            <th>Team name</th>
-              <th> Modify <b>(Admin part)</b></th>
+              <th>Team name</th>
+              <th> Modify <b>(Admin only)</b></th>
             </tr>
           </thead>
-          <tbody *ngFor="let team of teamList"> 
+          <tbody *ngFor="let team of teamList">
             <tr>
               <th scope="row"> {{team.teamName}}</th> <!-- Adding a team in the row.-->
               <td>
@@ -33,23 +34,100 @@
     <div class="col">
       <div class="mat-elevation-z8" style="border:1px solid black; height: 500px; ">
         <table mdbTable mdbTableScroll scrollY="true" scrollX="false" maxHeight=500>
-          <thead class="indigo darken-3 white-text   table-layout: auto; ">
+          <thead class="indigo darken-3 white-text table-layout: auto; ">
             <tr>
-              <th>Team name</th>
-              <th>Modify <b>(Leader part)</b></th>
+              <th>Participant name</th>
+              <th>Modify</th>
             </tr>
           </thead>
-          <tbody *ngFor="let user of teamMembers"> 
-            <tr>
-              <th scope="row"> {{user.username}} </th>
-              <td>
-                <button type="button" class="btn btn-danger" (click)="deleteUser(user.username)" >Delete</button>
-              </td>
-            </tr>
+          <tbody *ngIf="!teamMembers">
+            <h5 style="margin-top: 10px; margin-left: 10px;">No team selected</h5>
+          </tbody>
+          <tbody *ngFor="let user of teamMembers">
+            <ng-container
+              *ngIf="currentUser?.username== user.username && currentUser?.isTeamLeader; then showTeamLeader; else showRegularMember">
+            </ng-container>
+            <ng-template #showTeamLeader>
+              <tr *ngIf="currentUser?.username== user.username && currentUser?.isTeamLeader"
+                style="background-color: rgb(240, 221, 180);">
+                <th scope="row"> {{user.username}} <b>(YOU)</b> </th>
+                <th></th>
+              </tr>
+            </ng-template>
+            <ng-template #showRegularMember>
+              <tr>
+                <th scope="row"> {{user.username}} </th>
+                <td>
+                  <button type="button" class="btn btn-danger buttonRight"
+                    (click)="deleteUser(user.username)">Delete</button>
+                </td>
+              </tr>
+            </ng-template>
           </tbody>
         </table>
       </div>
-    </div> 
-</div>
-<button type="button" class="btn btn-danger deleteTeam" (click)="deleteTeamTL()" >Delete Team</button></div>
+    </div>
+  </div>
 
+  <!-- This content will be stuff that is only visible for team leaders (and non admins) -->
+  <div *ngIf="currentUser?.isTeamLeader == true" style="margin-top: 50px;">
+    <div class="row">
+
+      <div class="col">
+        <h4>Races assigned to your team</h4>
+      </div>
+      <div class="col-5">
+        <div ngbDropdown class="btn-group" style="float: right; margin-bottom: 10px;">
+          <button class="btn btn-outline-primary" id="dropdownMenu1" ngbDropdownToggle>Click here to join a race</button>
+          <ul class="dropdown-menu">
+            <button class="dropdown-item" *ngFor="let race of racesAvailable" (click)="assignRaceToTeamTL(race.raceID,currentUser?.team)"
+              >{{race.locationDescription}} - {{race.startTime | date:"MM/dd/yyyy"}}</button>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+    <div class="mat-elevation-z8" style="border:1px solid black; height: 500px;">
+      <table mdbTable mdbTableScroll scrollY="true" scrollX="false" maxHeight=500>
+        <thead class="red darken-4 white-text table-layout: auto; ">
+          <tr>
+            <th>Race ID</th>
+            <th>Location<b></b></th>
+            <th>Date<b></b></th>
+            <th>Time<b></b></th>
+            <th>Modify<b></b></th>
+          </tr>
+        </thead>
+        <tbody *ngIf="!racesAssignedList">
+          <h5>No races</h5>
+        </tbody>
+        <tbody *ngFor="let race of racesAssignedList">
+          <tr>
+            <th scope="row"> {{race.raceID}} </th>
+            <th scope="row"> {{race.locationDescription}} </th>
+            <th scope="row"> {{race.startTime | date:"MM/dd/yyyy"}} </th>
+            <th scope="row"> {{race.startTime | date:"HH:mm"}} </th>
+            <td>
+              <button type="button" class="btn btn-danger buttonRight"
+                (click)="removeTeamFromRace(race.raceID, currentUser?.team)">Cancel</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+
+
+
+    <div class="wrapper">
+      <button type="button" class="btn btn-danger" style="margin-top: 50px;" (click)="openConfirmationDialog()">Delete
+        your team</button>
+      <h6 style="margin-top: 10px;">This action is permanent and cannot be undone</h6>
+    </div>
+
+  </div>
+
+
+
+</div>

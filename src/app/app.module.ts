@@ -27,6 +27,8 @@ import { RacesComponent } from './races/races.component';
 import { RaceEditorComponent } from './race-editor/race-editor.component';
 import { AlertComponent } from './alert/alert.component';
 import { RaceTeamsManagementComponent } from './race-teams-management/race-teams-management.component';
+import { ConfirmationDialogComponent } from './service/confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogService } from './service/confirmation-dialog/confirmation-dialog.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import { RaceTeamsManagementComponent } from './race-teams-management/race-teams
     RacesComponent,
     RaceEditorComponent,
     AlertComponent,
-    RaceTeamsManagementComponent
+    RaceTeamsManagementComponent,
+    ConfirmationDialogComponent
 
   ],
   imports: [
@@ -63,7 +66,7 @@ import { RaceTeamsManagementComponent } from './race-teams-management/race-teams
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
-        JwtHelperService
+        JwtHelperService, ConfirmationDialogService
   ],
   bootstrap: [AppComponent],
 
