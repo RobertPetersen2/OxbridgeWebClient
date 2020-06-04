@@ -48,14 +48,24 @@
           <h5>Add a new race</h5>
           <br>
           <input formControlName="location" placeholder="Location" required class="form-control" [(ngModel)]="locationDescription">
+          <div *ngIf="newRaceForm.controls.location.errors && (newRaceForm.touched)" class="alert alert-danger ">
+            <div *ngIf="newRaceForm.controls.location.errors.required && (newRaceForm.touched)"> Location is required</div>
+            <div *ngIf="newRaceForm.controls.location.errors.minlength && (newRaceForm.touched)">Too short</div>
+          </div>
           <br>
           <input class="form-control" [owlDateTimeTrigger]="dt3" [owlDateTime]="dt3" placeholder="Date"
             formControlName="date" [(ngModel)]="startTime" #spy>
           <owl-date-time [pickerType]="'calendar'" #dt3></owl-date-time>
+          <div *ngIf="newRaceForm.controls.date.errors && (newRaceForm.touched)" class="alert alert-danger">
+              <div *ngIf="newRaceForm.controls.date.errors.required && (newRaceForm.touched)">Date is invalid</div>
+          </div>
           <br>
           <input class="form-control" [owlDateTimeTrigger]="dt4" [owlDateTime]="dt4" placeholder="Time"
             formControlName="time" [(ngModel)]="startTime">
           <owl-date-time [pickerType]="'timer'" #dt4></owl-date-time>
+          <div *ngIf="newRaceForm.controls.time.errors && (newRaceForm.touched)" class="alert alert-danger">
+            <div *ngIf="newRaceForm.controls.time.errors.required && (newRaceForm.touched)">Time is invalid</div>
+          </div>
           <br>
           <br>
           <button class="btn btn-success" type="submit">Add a Race</button>
