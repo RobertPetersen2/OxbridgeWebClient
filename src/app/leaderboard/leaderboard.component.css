@@ -1,0 +1,16 @@
+td, th {
+    border: 1px solid #dddddd;  
+    text-align: left;
+    padding: 7px;
+    font-size: 100%;
+    }
+  
+  
+    .wrapper {
+      text-align: center;
+      margin: auto;
+      max-width: 180px;
+  }
+  
+  
+  
