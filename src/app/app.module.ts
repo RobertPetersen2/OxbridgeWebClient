@@ -29,6 +29,7 @@ import { AlertComponent } from './alert/alert.component';
 import { RaceTeamsManagementComponent } from './race-teams-management/race-teams-management.component';
 import { ConfirmationDialogComponent } from './service/confirmation-dialog/confirmation-dialog.component';
 import { ConfirmationDialogService } from './service/confirmation-dialog/confirmation-dialog.service';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ConfirmationDialogService } from './service/confirmation-dialog/confirm
     RaceEditorComponent,
     AlertComponent,
     RaceTeamsManagementComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    LeaderboardComponent
 
   ],
   imports: [
