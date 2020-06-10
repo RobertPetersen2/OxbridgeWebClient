@@ -10,17 +10,19 @@ import { LeaderboardService } from '../service/leaderboard.service';
 })
 export class LeaderboardComponent implements OnInit {
 
-  public teamList: Leaderboard[] = [];
+  public leaderBoard: Leaderboard[] = [];
 
   constructor(
     private leaderboardService: LeaderboardService,
   ) { 
 
     // Leaderboard
-    const teamList = this.leaderboardService.getLeadereboard();
-    teamList.subscribe((teamListData: Leaderboard[]) => {
-      this.teamList = teamListData;
-      console.log(this.teamList)
+    // EXAMPLE STRING:   
+    // {"Leaderboard":[{"TeamName":"Pierres SuperSurfers","Tag":1,"CompleteTime":"2020-06-10T10:47:34.940Z"}],"Header":"checkpoint","TeamName":""}
+    const leaderBoard = this.leaderboardService.getLeadereboard();
+    leaderBoard.subscribe((leaderBoardData: Leaderboard[]) => {
+      this.leaderBoard = leaderBoardData;
+      console.log(this.leaderBoard)
       
     });
 

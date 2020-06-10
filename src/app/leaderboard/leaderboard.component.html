@@ -5,16 +5,16 @@
     <h4>Leaderboard</h4>
     <div class="mat-elevation-z8" style="border:1px solid black; height: 500px; ">
         <table mdbTable mdbTableScroll scrollY="true" scrollX="false" maxHeight=500>
-            <thead class="indigo darken-3 white-text   ">
+            <thead class="indigo darken-3 white-text">
               <tr>
                 <th>Rank</th>
                 <th>Team name</th>
               </tr>
             </thead>
-            <tbody *ngFor="let team of teamList; let i= index">
+            <tbody *ngFor="let Leaderboard of leaderBoard; let i= index">
               <tr>
                 <th scope="row"> {{i+1}} </th> <!-- Should auto add a rank number in the row.-->
-                <th scope="row"> {{team.teamName}} </th> <!-- Should add a team in the row.-->
+                <th scope="row"> {{Leaderboard.TeamName}} </th> <!-- Should add a team in the row.-->
               </tr>
             </tbody>
         </table>

@@ -1,3 +1,3 @@
 export class Leaderboard {
-    public teamName: string;
+    public TeamName: string;
 }
