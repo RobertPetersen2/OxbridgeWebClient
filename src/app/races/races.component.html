@@ -36,11 +36,30 @@
     </div>
     <div class="col-5">
       <div class="box">
-        <h5>Race today</h5>
-        <!-- <label class="raceinfo">Race today: </label> -->
-        <a href="#">Sønderborg Havn </a>
-        <h5>At 10 AM</h5>
-        <button type="button" class="btn btn-success">Start Race NOW !</button>
+
+        <ng-container
+        *ngIf="isThereARaceToday; then showRace; else showNoRace">
+      </ng-container>
+      <ng-template #showRace>
+          <h5>Race today</h5>
+          <!-- <label class="raceinfo">Race today: </label> -->
+          <a>{{todaysRace.locationDescription}}</a>
+          <h5>At {{todaysRace.startTime | date:"HH:mm"}}</h5>
+          <ng-container *ngIf="isRaceStarted; then showStopButton; else showStartButton"></ng-container>
+          <ng-template #showStartButton>
+            <button type="button" class="btn btn-success" (click)="startRace()">Start race now!</button>
+          </ng-template>
+          <ng-template #showStopButton>
+            <a style="color: darkblue;">Race is already running!</a>
+            <br>
+            <button type="button" class="btn btn-danger" (click)="stopRace()">Stop the race</button>
+          </ng-template>
+      </ng-template>
+      <ng-template #showNoRace>
+        <h5>No races today</h5>
+        <a>Race will show up the same day as the event is planned</a>
+      </ng-template>
+      
       </div>
       <div class="box">
         <form [formGroup]="newRaceForm" (ngSubmit)="submit()">
