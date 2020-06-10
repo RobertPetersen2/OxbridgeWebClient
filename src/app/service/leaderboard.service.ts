@@ -8,20 +8,26 @@ import { HttpClient } from '@angular/common/http';
 })
 export class LeaderboardService {
 
-  private teamList: BehaviorSubject<Leaderboard[]>;
+  private leaderBoard: BehaviorSubject<Leaderboard[]>;
 
   constructor(private http:HttpClient) { 
 
-    this.teamList = new BehaviorSubject<Leaderboard[]>([]);
+    this.leaderBoard = new BehaviorSubject<Leaderboard[]>([]);
 
   }
 
   public getLeadereboard(): Observable<Leaderboard[]>{
-    const teamList = this.http.get<Leaderboard[]>('http://148.251.122.228:3000/races/leaderboard');
-    teamList.subscribe((response: Leaderboard[]) => {
-      this.teamList.next(response);
+    const leaderBoard = this.http.get<Leaderboard[]>('http://148.251.122.228:3000/races/leaderboard');
+    leaderBoard.subscribe((response: Leaderboard[]) => {
+      // this.teamList.next(response);
+      let teamObj = JSON.parse(JSON.stringify(response));
+
+      //console.log(teamObj.Leaderboard);
+      console.log(response)
+        
+        this.leaderBoard.next(teamObj.Leaderboard);
     });
-    return this.teamList;
+    return this.leaderBoard;
   }
 
 }
