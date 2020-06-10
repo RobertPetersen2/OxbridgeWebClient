@@ -18,7 +18,7 @@
               <th scope="row"> {{team.teamName}}</th> <!-- Adding a team in the row.-->
               <td>
                 <button type="button" class="btn btn-warning" (click)="editTeam(team)">Edit</button>
-                <button type="button" class="btn btn-danger" (click)="deleteTeam(team.teamName)">Delete</button>
+                <button type="button" class="btn btn-danger" (click)="openDeleteOtherTeamDialog(team.teamName)">Delete</button>
               </td>
             </tr>
           </tbody>
@@ -121,7 +121,7 @@
 
 
     <div class="wrapper">
-      <button type="button" class="btn btn-danger" style="margin-top: 50px;" (click)="openConfirmationDialog()">Delete
+      <button type="button" class="btn btn-danger" style="margin-top: 50px;" (click)="openDeleteOwnTeamDialog()">Delete
         your team</button>
       <h6 style="margin-top: 10px;">This action is permanent and cannot be undone</h6>
     </div>
