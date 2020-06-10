@@ -135,11 +135,21 @@ export class TeamListComponent implements OnInit {
     this.raceService.removeTeamFromRace(raceID,teamName);
   }
 
-  openConfirmationDialog() {
+  openDeleteOwnTeamDialog() {
     this.confirmationDialogService.confirm('Please confirm deletion of team', 'Do you really want to delete your team?',"Confirm","Cancel","lg")
     .then((confirmed) => {
       if(confirmed){
         this.deleteTeamTL();
+      }
+    })
+    .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+  }
+
+  openDeleteOtherTeamDialog(teamName: string) {
+    this.confirmationDialogService.confirm('Please confirm deletion of team', 'Do you really want to delete this team?',"Confirm","Cancel","lg")
+    .then((confirmed) => {
+      if(confirmed){
+        this.deleteTeam(teamName);
       }
     })
     .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
