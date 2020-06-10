@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Leaderboard } from '../models/leaderboard';
+import { Router } from '@angular/router';
+import { LeaderboardService } from '../service/leaderboard.service';
 
 @Component({
   selector: 'app-leaderboard',
@@ -7,7 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeaderboardComponent implements OnInit {
 
-  constructor() { }
+  public teamList: Leaderboard[] = [];
+
+  constructor(
+    private leaderboardService: LeaderboardService,
+  ) { 
+
+    // Leaderboard
+    const teamList = this.leaderboardService.getLeadereboard();
+    teamList.subscribe((teamListData: Leaderboard[]) => {
+      this.teamList = teamListData;
+      console.log(this.teamList)
+      
+    });
+
+  }
 
   ngOnInit(): void {
   }

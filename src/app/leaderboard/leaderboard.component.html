@@ -11,9 +11,10 @@
                 <th>Team name</th>
               </tr>
             </thead>
-            <tbody >
+            <tbody *ngFor="let team of teamList; let i= index">
               <tr>
-                <th scope="row"> No ongoing races</th> <!-- Should add a team in the row.-->
+                <th scope="row"> {{i+1}} </th> <!-- Should auto add a rank number in the row.-->
+                <th scope="row"> {{team.teamName}} </th> <!-- Should add a team in the row.-->
               </tr>
             </tbody>
         </table>
