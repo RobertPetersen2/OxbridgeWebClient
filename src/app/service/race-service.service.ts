@@ -13,6 +13,7 @@ export class RaceServiceService {
 
   // Event
   public dataHasChanged = new EventEmitter<string>();
+  public raceGoingOn = new EventEmitter<boolean>();
 
   private availableTeamsForRaceID: BehaviorSubject<Team[]>
   private availableRacesForTeam: BehaviorSubject<Race[]>
@@ -188,6 +189,48 @@ export class RaceServiceService {
       error => console.log("ERROR MESSAGE:" + JSON.stringify(error))
     );
   }
+
+  startRace(raceID:number): void{
+    const response = this.http.post<any>('http://148.251.122.228:3000/races/startRace/' + raceID,{});
+    response.subscribe(
+      data => {
+        let obj = JSON.parse(JSON.stringify(data));
+        if(obj.hasOwnProperty('startedRace')){
+          if(obj.startedRace == true){
+            this.raceGoingOn.emit(true);
+          }
+        }
+       },
+      error => console.log("ERROR MESSAGE:" + JSON.stringify(error))
+    );
+  }
+
+  stopRace(raceID:number): void{
+    this.raceGoingOn.emit(false);
+
+    // TODO MAKE THIS CODE WORK: 
+
+    // const response = this.http.post<any>('http://148.251.122.228:3000/races/stopRace/' + raceID,{});
+    // response.subscribe(
+    //   data => {
+    //     let obj = JSON.parse(JSON.stringify(data));
+    //     if(obj.hasOwnProperty('stoppedRace')){
+    //       if(obj.stoppedRace == true){
+    //         this.raceGoingOn.emit(false);
+    //       }
+    //     }
+    //    },
+    //   error => console.log("ERROR MESSAGE:" + JSON.stringify(error))
+    // );
+  }
+
+  checkIfOnGoingRace(): Race{
+    // TODO check if there is a race going on right now 
+
+    return new Race();
+  }
+
+  
 
   
 
