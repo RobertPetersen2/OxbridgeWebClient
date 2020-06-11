@@ -25,7 +25,8 @@ export class EnrollParticipantComponent implements OnInit {
   // Users own status (currntly only used for testing): <--- 3 different swithces
   public userEnrollmentStatus: EnrollmentStatus;
 
-
+  // List of teams the user can apply for
+  teams: Team[] = [];
 
   constructor(
     private enrollmentService: EnrollmentService,
@@ -47,6 +48,7 @@ export class EnrollParticipantComponent implements OnInit {
       this.teams = availableTeamsData;
     });
 
+    // If enrollment status was changed we need to reload the page
     enrollmentService.newDataAdded.subscribe(
       (st: string) => {
         console.log(st);
@@ -54,6 +56,7 @@ export class EnrollParticipantComponent implements OnInit {
       }
     );
     
+    // Get the team name of the user logged in
     enrollmentService.getYourTeam().subscribe(
       (teamNameData:string) => {
         this.yourTeam = teamNameData;
@@ -62,21 +65,12 @@ export class EnrollParticipantComponent implements OnInit {
 
   }
 
-
-
-
-
-
-  teams: Team[] = [
-    // { teamName: 'HardCodedTeam1' },
-    // { teamName: 'HardCodedTeam2' },
-    // { teamName: 'HardCodedTeam3' }
-  ];
-
-
   ngOnInit(): void {
   }
 
+  /**
+   * This method is used if the user isn't assigned to a Team, and he wants to apply for one he selected
+   */
   submit() {
     let currentUser = this.authenticationService.currentUserValue;
     console.log("Sending: ")
@@ -85,10 +79,17 @@ export class EnrollParticipantComponent implements OnInit {
     
   }
 
+  /**
+   * Used for displaying the team, which the user clicked on from the dropdown menu
+   * @param team 
+   */
   click(team: string): void {
     this.selectedTeam = team;
   }
 
+  /**
+   * This method is used if the user has already joined a team, but wants to leave it
+   */
   leaveTeam(){
     let currentUser = this.authenticationService.currentUserValue;
     this.enrollmentService.leaveTeam(currentUser.username);

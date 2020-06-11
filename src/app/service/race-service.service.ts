@@ -39,6 +39,9 @@ export class RaceServiceService {
   }
 
 
+  /**
+   * Retrieve all the races
+   */
   public getRaces(): Observable<Race[]> {
     // Load the races from the DB
     const raceObj = this.http.get<Race[]>('http://148.251.122.228:3000/races/');
@@ -49,11 +52,19 @@ export class RaceServiceService {
     return this.allRaces;
   }
 
+  /**
+   * Get a specific race based on the raceID
+   * @param raceID 
+   */
   public getSpecificRace(raceID: number): Observable<Race> {
 
       return this.http.get<Race>('http://148.251.122.228:3000/races/' + raceID); 
   }
 
+  /**
+   * Post a new race to the server
+   * @param race the new race
+   */
   public postRace(race: Race): void {
     const response = this.http.post<any>('http://148.251.122.228:3000/races', race);
     response.subscribe(
@@ -84,6 +95,10 @@ export class RaceServiceService {
 
   }
 
+  /**
+   * Delete a race based on the raceID
+   * @param raceID 
+   */
   public deleteRace(raceID: number) : void {
      this.http.delete('http://148.251.122.228:3000/races/' + raceID).subscribe(
        data => {
@@ -107,14 +122,25 @@ export class RaceServiceService {
      );
   }
 
+  /**
+   * Select a race which you want to modify at the moment (only one select at a time)
+   * @param raceID 
+   */
   public selectRaceID(raceID: number) : void {
     this.currentRaceID.next(raceID);
   }
 
+  /**
+   * Get the raceID of the instance we are currently editing
+   */
   getSelectedRaceID(): Observable<number> {
     return this.currentRaceID.asObservable();
   }
 
+  /**
+   * Get the index of the race in our collection based on the raceID
+   * @param raceID 
+   */
   private getIndexByRaceId(raceID:number) : any {
     // We create a temporary variable of the races observable
     let allRacesLocal: Race[] = this.allRaces.getValue();
@@ -129,6 +155,11 @@ export class RaceServiceService {
     }
   }
 
+  /**
+   * Will retreive a list of all the available teams, that you can add to a race
+   * Will just return all the teams, even those who are on the race. But this will be changed in the future
+   * @param raceID 
+   */
   getAvailableTeamsByRaceId(raceID:number) : Observable<Team[]> {
     // Load the teams from the DB <--- TODO make it only show available teams, and not all teams
     const teamsObj = this.http.get<Team[]>('http://148.251.122.228:3000/teams/');
@@ -139,6 +170,10 @@ export class RaceServiceService {
     return this.availableTeamsForRaceID;
   }
 
+  /**
+   * Will get a list of all the races, that the given team is not assigned to
+   * @param team 
+   */
   getAvailableRacesByTeam(team:string) : Observable<Race[]> {
         // Load the races from the DB 
         const racesObj = this.http.get<Race[]>('http://148.251.122.228:3000/races/availableRaces');
@@ -150,6 +185,9 @@ export class RaceServiceService {
 
   }
 
+  /**
+   * Will get a list of all the races, that the given team IS assigned to
+   */
   getRacesAssignedToTeam() : Observable<Race[]> {
     // Load the races of the token-holder (team leader)
     const teamsObj = this.http.get<Race[]>('http://148.251.122.228:3000/races/assignedRaces');
@@ -160,6 +198,11 @@ export class RaceServiceService {
     return this.racesAssignedForSelectedTeam;
   }
 
+  /**
+   * Here we assign a team to a race using the team name and raceID
+   * @param raceID 
+   * @param teamName 
+   */
   assignTeamByRaceId(raceID:number, teamName:string): void{
     const response = this.http.post<any>('http://148.251.122.228:3000/races/assignTeam',{raceID, teamName});
     response.subscribe(
@@ -175,6 +218,11 @@ export class RaceServiceService {
     );
   }
 
+  /**
+   * Removes the team from the raceID specified 
+   * @param raceID 
+   * @param teamName 
+   */
   removeTeamFromRace(raceID:number, teamName:string): void{
     const response = this.http.post<any>('http://148.251.122.228:3000/races/removeTeam/' + raceID,{teamName});
     response.subscribe(
@@ -190,6 +238,10 @@ export class RaceServiceService {
     );
   }
 
+  /**
+   * Will start the race based on the raceID given 
+   * @param raceID 
+   */
   startRace(raceID:number): void{
     const response = this.http.post<any>('http://148.251.122.228:3000/races/startRace/' + raceID,{});
     response.subscribe(
@@ -205,25 +257,17 @@ export class RaceServiceService {
     );
   }
 
+  /**
+   * Upcoming: Stop the race based on the raceID given
+   * @param raceID 
+   */
   stopRace(raceID:number): void{
     this.raceGoingOn.emit(false);
-
-    // TODO MAKE THIS CODE WORK: 
-
-    // const response = this.http.post<any>('http://148.251.122.228:3000/races/stopRace/' + raceID,{});
-    // response.subscribe(
-    //   data => {
-    //     let obj = JSON.parse(JSON.stringify(data));
-    //     if(obj.hasOwnProperty('stoppedRace')){
-    //       if(obj.stoppedRace == true){
-    //         this.raceGoingOn.emit(false);
-    //       }
-    //     }
-    //    },
-    //   error => console.log("ERROR MESSAGE:" + JSON.stringify(error))
-    // );
   }
 
+  /**
+   * Upcomming: Ask the backend if there is a race going on right now
+   */
   checkIfOnGoingRace(): Race{
     // TODO check if there is a race going on right now 
 

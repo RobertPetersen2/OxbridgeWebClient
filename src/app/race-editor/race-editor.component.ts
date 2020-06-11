@@ -64,22 +64,10 @@ export class RaceEditorComponent implements OnInit {
       });
     })
 
-    // const specificRaceObservable = this.raceService.getSpecificRace(999); // <-- THIS HAS TO BE SOME THING YOU CAN SPECIFY FROM RACES.COMPONENT
-    // specificRaceObservable.subscribe((raceData: Race) => {
-    //   // Correct date and time
-    //   var dateTimeFixed = new Date(raceData.startTime);
-    //   this.currentRace = raceData;
-    //   this.currentRace.startTime = dateTimeFixed;
-
-    //   // DIAGNOSTICS - DEBUGGING
-    //   this.diagnosticDataRace = JSON.stringify(this.currentRace); // <--- DIAGNOSTICS / DEBUGGING
-    //   console.log(this.currentRace);
-    //   // Load the check points when data is loaded
-    //   this.loadCheckpoints();
-    // });
   }
 
   ngOnInit(): void {
+    // Will just show your current position on the map
     navigator.geolocation.getCurrentPosition(position => {
       this.center = {
         lat: position.coords.latitude,
@@ -97,14 +85,25 @@ export class RaceEditorComponent implements OnInit {
     this.returnUrl = '/races';
   }
 
+  /**
+   * Zoom in on the map
+   */
   zoomIn() {
     if (this.zoom < this.options.maxZoom) this.zoom++
   }
 
+  /**
+   * Zoom out on the map
+   */
   zoomOut() {
     if (this.zoom > this.options.minZoom) this.zoom--
   }
 
+  /**
+   * Will add a pin on the location in which the user clicked, and then add it to our array of checkpoints, which 
+   * are later sent and saved on the server, when the user submits
+   * @param event click event (when user places a pin)
+   */
   addCurrentLocation(event: google.maps.MouseEvent) {
     console.log(event);
     this.markers.push({
@@ -131,6 +130,9 @@ export class RaceEditorComponent implements OnInit {
 
   }
 
+  /**
+   * Will load the checkpoints of the current raceID and place them on the map and table
+   */
   loadCheckpoints() {
     // Get a reference to this
     var self = this;
@@ -158,33 +160,31 @@ export class RaceEditorComponent implements OnInit {
 
 
 
+  /**
+   * Will remove the last marker
+   */
   undoMarker() {
     this.markers.splice(-1, 1)
     // This one is saved for the json that we post to the server
     this.currentRace.checkPoints.splice(-1,1);
   }
 
+  /**
+   * Submit the changes 
+   */
   submit() {
-
-
+    // We don't submit anything if it's invalid data (If our Form is unsatisfied)
     if(this.raceEditForm.invalid){
       console.log("Invalid input");
       return;
     }
 
-    console.log("Submit was executed!");
     // Get all the data together and send it as a JSON to the server under the ID
     console.log("Server will send this info to the backend: ");
     console.log(this.currentRace);
     // POST IT -> And print the result in the console for debugging reasons 
     const response = this.raceService.postRace(this.currentRace);
-    // response.subscribe((response: any) => {
-    //   console.log("Response from the server: ");
-    //   console.log(response);
-    //   // Lets assume that the data was inserted. We then need to refresh the list
-    //   this.raceService.getRaces();
-    // });
-    // Return to previous page
+
     this.router.navigate([this.returnUrl]);
 
   }

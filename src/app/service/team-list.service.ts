@@ -44,17 +44,6 @@ export class TeamListService {
       //console.log(response);
       this.teamList.next(response);
 
-      // let teamObj = JSON.parse(JSON.stringify(response));
-      // // console.log(teamObj.teamName)
-      // // console.log(teamObj.users)
-
-      // this.teamNameTL = teamObj.teamName;
-      // let usersArray: TeamMember[] = teamObj.users;
-      // console.log(usersArray)
-
-      // console.log("whats inside teamList now")
-      // console.log(this.teamList)
-
     });
     return this.teamList;
   }
@@ -143,35 +132,4 @@ export class TeamListService {
 
 }
 
-
-
-
-// import { Injectable, EventEmitter } from '@angular/core';
-// import { BehaviorSubject, Observable } from 'rxjs';
-// import { User } from '../models/user';
-// import { Team } from '../models/team';
-// import { HttpClient } from '@angular/common/http';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class TeamListService {
-
-//   teams: Team[] = [];
-
-//   private availableTeams: BehaviorSubject<Team[]>;
-
-//   constructor(private http:HttpClient) { 
-//     this.teams.push(new Team("Team in teamlist.service!"));
-//     this.teams.push(new Team("Team in teamlist.service2!"));
-//   }
-
-//   public getTeamList(): Observable<Team[]> { //
-//     const arrayObservable = new Observable<Team[]>(observer => {
-//           observer.next(this.teams);
-//     });
-//     return arrayObservable;
-//   }
-
-// }
 

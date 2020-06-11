@@ -66,16 +66,29 @@ export class RacesComponent implements OnInit {
 
   }
 
+  /**
+   * Will navigate to a page where you can edit the race selected
+   * @param raceID 
+   */
   editRace(raceID: number) {
     this.raceService.selectRaceID(raceID);
     this.router.navigate(['/race-editor']);
   }
 
+  /**
+   * Delete the race using the raceID
+   * @param raceID 
+   */
   deleteRace(raceID: number) {
     this.raceService.deleteRace(raceID);
 
   }
 
+  /**
+   * Used along with our Form to create a new race. 
+   * raceID is set to -1 which from the backend side is considered a request to create a new race. 
+   * A new raceID will then be generated. 
+   */
   submit() {
     var newRace: Race = {
       raceID: -1, // -1 tells the server that we are creating a new race
@@ -86,20 +99,22 @@ export class RacesComponent implements OnInit {
       assignedTeams: [],
     };
 
+    // We should not post anything if the form is invalid in some way
     if (this.newRaceForm.invalid || this.newRaceForm.untouched) {
       console.log("Invalid input");
       return;
     }
-
-    console.log("Submit was executed!");
     // Get all the data together and send it as a JSON to the server under the ID
-    console.log("Server will send this info to the backend: ");
     console.log(newRace);
     // Post it, and if it was a success it should automatically appear in the table
     this.raceService.postRace(newRace);
 
   }
 
+  /**
+   * This method wraps the delete method in a dialog, where the user can confirm his action. 
+   * @param raceID 
+   */
   deleteRaceDialog(raceID: number) {
     this.confirmationDialogService.confirm('Please confirm deletion of race', 'Do you really want to delete this race?', "Confirm", "Cancel", "lg")
       .then((confirmed) => {
@@ -110,6 +125,10 @@ export class RacesComponent implements OnInit {
       .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   }
 
+  /**
+   * This method will check the collection of races, and see if there is an instance that has the same 
+   * date as today. If thats the case, it will be displayed in the template, where the user is able to begin the race
+   */
   checkIfRaceToday() {
     let date = new Date();
     console.log("Todays date: " + date);
@@ -127,6 +146,10 @@ export class RacesComponent implements OnInit {
 
   }
 
+  /**
+   * This helper method will basically check if the user is allowed to start the race. 
+   * You can't start a race before the startTime of the race
+   */
   checkIfTimeYet(): Boolean {
     // Check if there is a race today first
     if(this.isThereARaceToday){
@@ -141,6 +164,9 @@ export class RacesComponent implements OnInit {
     return false;
   }
 
+  /**
+   * Start the race using the raceID of 'todaysRace'
+   */
   startRace(){
     var ready = this.checkIfTimeYet();
     if(ready){
@@ -148,6 +174,9 @@ export class RacesComponent implements OnInit {
     }
   }
 
+  /**
+   * Stop the race using the raceID of 'todaysRace'
+   */
   stopRace(){
     var ready = this.checkIfTimeYet();
     if(ready){

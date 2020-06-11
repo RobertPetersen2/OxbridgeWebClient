@@ -47,27 +47,33 @@ export class RaceTeamsManagementComponent implements OnInit {
       });
     });    
     console.log("Teams attending: " + JSON.stringify(this.teamsAttending));
-
-
-
   }
 
   ngOnInit(): void {
-    // this.availableTeams = [
-    //   {teamName:"Endnu mere lort"},
-    //   {teamName:"Kartoffel"},
-    //   {teamName:"Røvbanan"}
-    // ];
   }
 
+  /**
+   * Used for setting the value of selectedTeam. Is usually set in the dropdown menu, when the user clicks on a team
+   * @param team 
+   */
   click(team: string): void {
     this.selectedTeam = team;
   }
 
+  /**
+   * Will assign a team to a race
+   * @param raceID 
+   * @param teamName 
+   */
   assignTeam(raceID:number, teamName:string){
     this.raceService.assignTeamByRaceId(raceID, teamName);
   }
 
+  /**
+   * Will remove the team again from the race
+   * @param raceID
+   * @param teamName 
+   */
   removeTeam(raceID:number, teamName:string){
     this.raceService.removeTeamFromRace(raceID,teamName);
   }

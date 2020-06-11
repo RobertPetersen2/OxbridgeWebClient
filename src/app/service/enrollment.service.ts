@@ -14,6 +14,7 @@ export class EnrollmentService {
   private availableTeams: BehaviorSubject<Team[]>;
   private pendingApprovals: BehaviorSubject<PendingUser[]>;
   private currentTeam: BehaviorSubject<string>;
+
   // Event used as notification to other components
   public newDataAdded = new EventEmitter<string>();
 
@@ -25,6 +26,10 @@ export class EnrollmentService {
    }
 
 
+   /**
+    * When a user enters the pariticpant enrollment page, this method will be loaded. 
+    * It returns an Enum telling if his application is in-progress, if he is assigned to a team, or if he doesn't have a team at all. 
+    */
    public getStatus(): Observable<EnrollmentStatus> {
     // Load the races from the DB
     const statusObj = this.http.get<any>('http://148.251.122.228:3000/enrollment/status');
@@ -59,6 +64,9 @@ export class EnrollmentService {
     return this.currentUserEnrollmentStatus;
   }
 
+  /**
+   * This method will get a list of all the teams the user can apply to
+   */
   public getAvailableTeams(): Observable<Team[]> {
     // Load the races from the DB
     const teamObj = this.http.get<Team[]>('http://148.251.122.228:3000/teams/availableTeams');
@@ -73,6 +81,11 @@ export class EnrollmentService {
   }
 
 
+  /**
+   * This method will perform the enrollment itself using the parameters required
+   * @param username username of the person who would like to join a team
+   * @param team the team he would like to join
+   */
   public applyForTeam(username:string, team:string): void {
     // Load the races from the DB
     const applyObj = this.http.post<any>('http://148.251.122.228:3000/enrollment/apply', {username, team});
@@ -87,7 +100,9 @@ export class EnrollmentService {
 
   }
 
-  // Only if there is in fact a team attached to the user, otherwise it will just say 'null' untill someone approves the enrollment
+  /**
+   * Will get team information, IF the user is attached to a team. Otherwise it will just be 'null' until the application is succeeded. 
+   */
   public getYourTeam() : Observable<string> {
     const teamObj = this.http.get('http://148.251.122.228:3000/teams/yourTeam');
     teamObj.subscribe(
@@ -105,6 +120,10 @@ export class EnrollmentService {
     return this.currentTeam;
   }
 
+  /**
+   * This method lets the user leave the team he is linked to 
+   * @param username the person who wants to leave
+   */
   public leaveTeam(username:string) : void {
     const teamObj = this.http.delete('http://148.251.122.228:3000/enrollment/leave');
     teamObj.subscribe(
@@ -126,6 +145,9 @@ export class EnrollmentService {
   // TEAM LEADER SECTION: 
   //#region 
 
+  /**
+   * This will fetch a list of pending approvals for the Team Leaders team. All other ones will not be shown.  
+   */
   public getPendingApprovals() : BehaviorSubject<PendingUser[]>{
     const pendingApprovals = this.http.get<PendingUser[]>('http://148.251.122.228:3000/enrollment/pending');
     pendingApprovals.subscribe((response: PendingUser[]) => {
@@ -135,6 +157,12 @@ export class EnrollmentService {
     return this.pendingApprovals;
   }
 
+  /**
+   * The Team Leader is able to decide whether he wants to approve or disapprove the team application
+   * @param accept yes or no (true or false)
+   * @param username the person trying to join the team leaders team
+   * @param team his own team
+   */
   public manageApproval(accept:boolean, username:string, team:string): void{
     const approval = this.http.post<any>('http://148.251.122.228:3000/enrollment/manageApproval', {accept, team, username});
     approval.subscribe(
@@ -160,6 +188,11 @@ export class EnrollmentService {
 
   }
 
+  /**
+   * Helper method used to find the index of the username in the list of pending users. 
+   * Used later on to remove the object from the observable array, so that we don't need to refresh the page of the components
+   * @param username 
+   */
   private getIndexByUsername(username:string) : any {
     // We create a temporary variable of the races observable
     let pendingApprovalsLocal: PendingUser[] = this.pendingApprovals.getValue();
