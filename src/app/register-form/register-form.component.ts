@@ -35,7 +35,7 @@ export class RegisterFormComponent implements OnInit {
   });
   }
 
-  // convenience getter for easy access to form fields
+  // convenience getter for easy access to the register-form fields
   get f() { return this.registerForm.controls; }
 
   onSubmit() {
@@ -46,18 +46,18 @@ export class RegisterFormComponent implements OnInit {
         return;
     }
 
-    this.loading = true;
+    this.loading = true;  // Shows loading animation
     this.registerService.register(this.registerForm.value)
         .pipe(first())
         .subscribe(
             data => {
-                this.alertService.success('Registration successful', true);
-                this.router.navigate(['/login-form']);
+                this.alertService.success('Registration successful', true);   // Show alert message
+                this.router.navigate(['/login-form']);   // After login, redirect to login page
                 console.log(data);
             },
             error => {
-                this.alertService.error(error.error);
-                this.loading = false;
+                this.alertService.error(error.error);   // gets the error message from the backend response & shows it as alert message
+                this.loading = false;   // Hides loading animation
                 console.log(error);
             });
   }

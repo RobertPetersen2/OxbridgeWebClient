@@ -9,6 +9,7 @@ import { AuthenticationService } from '../service/authentication.service';
 export class ErrorHandlerInterceptor implements HttpInterceptor {
     constructor(private authenticationService: AuthenticationService) {}
 
+    // This can be used to handle generel error responses
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(request).pipe(catchError(err => {
             if (err.status === 401) {

@@ -30,4 +30,18 @@ export class LeaderboardService {
     return this.leaderBoard;
   }
 
+  // ################################
+  // First try just to test something because of undifined error or no content/empty:
+  // ################################
+
+  // let teamObj = '{"Leaderboard":[{"TeamName":"Pierres SuperSurfers","Tag":1,"CompleteTime":"2020-06-10T10:47:34.940Z"}],"Header":"checkpoint","TeamName":""}';
+
+  // let jsonData = JSON.parse(teamObj);
+  // for (var i = 0; i < jsonData.Leaderboard.length; i++) {
+  //     var leaderboard = jsonData.Leaderboard[i];
+  //     console.log(leaderboard.TeamName + " " + leaderboard.Tag);
+  // }
+
+  // console.log(jsonData.Leaderboard)
+
 }

@@ -39,11 +39,14 @@ export class TeamListComponent implements OnInit {
     private confirmationDialogService : ConfirmationDialogService
   ) {
 
+    // Used to show visual things to specific role / used to hide things if the user isnt in a expected role.
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+    
+    
     // Get a list of all teams
-
     let currentUser = this.authenticationService.currentUserValue;
-    // Working part for admin
+
+    // Will show a list for admin
     if (currentUser.isAdmin === true) {
       const teamList = this.teamListService.getTeamList();
       teamList.subscribe((teamListData: Team[]) => {
@@ -58,6 +61,7 @@ export class TeamListComponent implements OnInit {
         this.teamList = teamListData;
         let teamObj = JSON.parse(JSON.stringify(teamListData));
 
+        // Place users from the team into the members array/table
         let usersArray: TeamMember[] = teamObj.users;
         this.teamMembers = usersArray
         this.currentlyEditing = teamObj.teamName;
@@ -87,14 +91,16 @@ export class TeamListComponent implements OnInit {
   }
 
 
+  // Modify teams
   editTeam(team: Team): any {
-    const index: number = this.teamList.indexOf(team);
+    const index: number = this.teamList.indexOf(team);  // get index of selected item
     console.log("Editing team: " + team.teamName);
     this.teamMembers = team.users;
     console.log(this.teamMembers);
     this.currentlyEditing = team.teamName
   }
 
+  // Delete a user from a team
   deleteUser(user: string) {
     console.log("You are trying to delete user from team: " + this.currentlyEditing + user);
     // We delete the user from the team, which should automatically update the teamlist that we are subscribing to
@@ -110,11 +116,13 @@ export class TeamListComponent implements OnInit {
 
   }
 
+  // Delete a team as admin
   deleteTeam(teamName: string) {
     this.teamListService.deleteTeam(teamName);
 
   }
 
+  // Delete a team as TeamLeader
   deleteTeamTL() {
     if (this.currentUser.isTeamLeader === true) {
       let teamName = this.currentlyEditing;
