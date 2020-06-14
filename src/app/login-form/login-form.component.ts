@@ -29,7 +29,7 @@ export class LoginFormComponent implements OnInit {
         // redirect to home if already logged in
         if (this.authenticationService.currentUserValue) { 
           console.log(this.authenticationService.currentUserValue);
-            //this.router.navigate(['/']);
+            this.router.navigate(['/']);    //Can be modified to redirect to a specific page
         }
     }
 
@@ -49,27 +49,27 @@ export class LoginFormComponent implements OnInit {
     onSubmit() {
         this.submitted = true;
 
-        // stop here if form is invalid
+        // stop here if the login-form is invalid
         if (this.loginForm.invalid) {
             return;
         }
 
-        this.loading = true;
+        this.loading = true;    // Shows loading animation
         this.authenticationService.login(this.f.username.value, this.f.password.value)
             .pipe(first())
             .subscribe(
                 data => {
-                    this.alertService.success('Login successful', true);
+                    this.alertService.success('Login successful', true);    // Show alert message
 
                     // Reload enrollment status for new user, so that we don't display enrollment status for previous user
                     this.enrollmentService.getStatus();
 
-                    this.router.navigate([this.returnUrl]);
+                    this.router.navigate([this.returnUrl]);     // Navigate to the selected return Url
                 },
                 error => {
                     
-                    this.alertService.error(error.error.message);
-                    this.loading = false;
+                    this.alertService.error(error.error.message);   // gets the error message from the backend response & shows it as alert message
+                    this.loading = false;   // Hides error message
                 });
     }
 }

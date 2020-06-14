@@ -25,6 +25,7 @@ export class TeamListService {
   }
 
 
+  // Get teamlist as admin
   public getTeamList(): Observable<Team[]> {
     // Load the Teams from the DB can both be used for Admin and Teamleader
     const teamObj = this.http.get<Team[]>('http://148.251.122.228:3000/teams/');
@@ -37,7 +38,7 @@ export class TeamListService {
   }
 
 
-  // TL Part
+  // Get teamlist as teamleader
   public getTeamMember(): Observable<Team[]> {
     const teamList = this.http.get<Team[]>('http://148.251.122.228:3000/teams/');
     teamList.subscribe((response: Team[]) => {
@@ -61,6 +62,7 @@ export class TeamListService {
   
 
 
+  // Delete a user from a selected team. Part #1
   public deleteUserFromTeam(teamName:string, username:string): void {
     const deleted = this.http.post<Team[]>('http://148.251.122.228:3000/teams/participant', {teamName, username});
     deleted.subscribe(
@@ -78,6 +80,7 @@ export class TeamListService {
     )
   }
 
+  // Delete a whole/complete team
   public deleteTeam(teamName:string): void {
     const deleted = this.http.post<Team[]>('http://148.251.122.228:3000/teams/deleteTeam', {teamName});
     deleted.subscribe(
@@ -111,6 +114,7 @@ export class TeamListService {
     )
   }
 
+  // Remove a member from a team. Part #2
   private removeMemberFromTeam(teamName:string, teamMember:string) : any {
     // We create a temporary variable of the teams observable
     let teamListLocal: Team[] = this.teamList.getValue();

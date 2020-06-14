@@ -12,6 +12,7 @@ export class AuthGuard implements CanActivate {
         private alertService: AlertService
     ) {}
 
+    // The user should be logged in to access pages
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const currentUser = this.authenticationService.currentUserValue;
         if (currentUser) {

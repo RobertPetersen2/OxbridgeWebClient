@@ -14,6 +14,7 @@ export class AlertComponent implements OnInit, OnDestroy {
 
     constructor(private alertService: AlertService) { }
 
+    // Will get the message from another page/component
     ngOnInit() {
         this.subscription = this.alertService.getMessage().subscribe(message => { 
             this.message = message; 

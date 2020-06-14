@@ -22,16 +22,19 @@ export class AlertService {
         });
     }
 
+    // Success alert message
     success(message: string, keepAfterNavigationChange = false) {
         this.keepAfterNavigationChange = keepAfterNavigationChange;
         this.subject.next({ type: 'success', text: message });
     }
 
+    // Error alert message
     error(message: string, keepAfterNavigationChange = false) {
         this.keepAfterNavigationChange = keepAfterNavigationChange;
         this.subject.next({ type: 'error', text: message });
     }
 
+    // Get the message
     getMessage(): Observable<any> {
         return this.subject.asObservable();
     }

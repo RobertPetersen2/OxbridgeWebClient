@@ -24,6 +24,7 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
+    // Login
     login(username: string, password: string) {
         return this.http.post<any>(`http://148.251.122.228:3000/authentication/login`, { username, password })
             .pipe(map(user => {
@@ -38,12 +39,14 @@ export class AuthenticationService {
             }));
     }
 
+    // Logout
     logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
     }
 
+    // if already logged in
     isAuthenticated(): boolean {
         let currentUser = this.currentUserValue;
         const token = currentUser.token;
